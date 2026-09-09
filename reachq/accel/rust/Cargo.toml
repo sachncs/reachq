@@ -1,0 +1,21 @@
+[package]
+name = "_reachq_rust"
+version = "0.1.0"
+edition = "2021"
+description = "Rust acceleration kernels for reachq via PyO3"
+license = "MIT"
+
+[lib]
+# The library name must match the import path: reachq.accel.rust._reachq_rust
+# Maturin will place the compiled .so at this path when the package
+# is installed editable from this directory.
+name = "_reachq_rust"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.21", features = ["extension-module"] }
+numpy = "0.21"
+
+[profile.release]
+opt-level = 3
+lto = "thin"

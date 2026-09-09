@@ -1,0 +1,171 @@
+"""Tests for the algorithmic improvements (Phase 3) and ablation flags.
+
+Every improvement should be toggleable. Disabling a flag must still produce
+a correct shortcut set / hopset. We don't assert bit-exact equality with
+the "all on" output (because sampling is non-deterministic under flag
+changes that affect the partition key) but we do assert the structural
+invariants documented in `docs/algorithmic_improvements.md`.
+"""
+
+from __future__ import annotations
+
+from importlib.util import find_spec
+
+import pytest
+
+from reachq import RefinementConfig
+from reachq.generators import random_dag, weighted_random_dag
+from reachq.hopset import build_hopset_for_sssp
+from reachq.reachability import bfs_reachability, parallel_bfs
+from reachq.shortcut import build_shortcut_set_for_reachability
+from reachq.shortest_paths import dijkstra, shortest_path_hopbound
+
+
+def all_flag_names() -> list[str]:
+    return list(RefinementConfig.__dataclass_fields__)
+
+
+@pytest.mark.parametrize("off", all_flag_names())
+def test_shortcut_set_correctness_with_each_flag_off(off: str) -> None:
+    """Disabling any single flag must still preserve reachability."""
+    g = random_dag(n=80, edge_probability=0.2, random_seed=7)
+    flags = {name: name != off for name in all_flag_names()}
+    shortcuts, beta, _ = build_shortcut_set_for_reachability(
+        g,
+        omega=3.0,
+        random_seed=7,
+        refinement=flags,
+    )
+    assert beta > 0
+    for v in g.vertices():
+        original = bfs_reachability(g, v)
+        augmented = parallel_bfs(g, v, shortcuts)
+        assert original == augmented, f"flag {off} off breaks correctness from {v}"
+
+
+@pytest.mark.parametrize("off", all_flag_names())
+def test_hopset_correctness_with_each_flag_off(off: str) -> None:
+    """Disabling any single flag must still preserve (1+eps) hopbound."""
+    g = weighted_random_dag(n=60, edge_probability=0.2, random_seed=7)
+    flags = {name: name != off for name in all_flag_names()}
+    hopset, _ = build_hopset_for_sssp(g, epsilon=0.1, random_seed=7, refinement=flags)
+    src = next(iter(g.vertices()))
+    orig = dijkstra(g, src)
+    approx = shortest_path_hopbound(g, hopset, src, max_hops=1000)
+    for v in g.vertices():
+        od = orig.get(v, float("inf"))
+        if od == float("inf"):
+            continue
+        ad = approx.get(v, float("inf"))
+        assert ad <= 1.1 * od + 1e-9, (
+            f"flag {off} off breaks (1+eps) bound for {v}: orig={od}, approx={ad}"
+        )
+
+
+def test_flags_dataclass_rejects_unknown_names() -> None:
+    with pytest.raises(ValueError):
+        RefinementConfig.from_dict({"does_not_exist": True})
+
+
+def test_density_aware_constant_scales_with_rho() -> None:
+    """The density-aware sampling constant is non-decreasing in rho."""
+    from reachq.shortcut import density_aware_constant
+
+    SAMPLING_DEFAULT = 10.0
+    assert density_aware_constant(rho=10.0, k=4.0) == SAMPLING_DEFAULT
+    sparse_c = density_aware_constant(rho=1.0, k=4.0)
+    dense_c = density_aware_constant(rho=100.0, k=4.0)
+    assert dense_c == SAMPLING_DEFAULT
+    assert 0.0 < sparse_c < dense_c
+    assert density_aware_constant(rho=0.1, k=4.0) == 1.0
+
+
+def test_direct_jls_call_not_affected_by_previous_adaptive_build() -> None:
+    """Regression: the density-aware constant is per-call, not a module global.
+
+    A direct ``jls_with_tc_pruning`` call after an adaptive wrapper build
+    must use SAMPLING_CONSTANT, not the constant the wrapper computed for
+    its own graph. This used to live in a module-level global that the
+    wrapper wrote as a side effect.
+    """
+    import math
+
+    from reachq.shortcut import jls_with_tc_pruning
+
+    g = random_dag(n=60, edge_probability=0.4, random_seed=7)
+    build_shortcut_set_for_reachability(
+        g,
+        random_seed=7,
+        refinement={"adaptive_sampling": True},
+    )
+
+    k = max(2.0, math.log2(g.num_vertices()))
+    baseline = jls_with_tc_pruning(
+        g,
+        k=k,
+        rho=1.0,
+        max_level=3,
+        n_global=g.num_vertices(),
+        random_seed=7,
+        refinement={"adaptive_sampling": True},
+        sampling_constant=10.0,
+    )
+    explicit_default = jls_with_tc_pruning(
+        g,
+        k=k,
+        rho=1.0,
+        max_level=3,
+        n_global=g.num_vertices(),
+        random_seed=7,
+        refinement={"adaptive_sampling": True},
+    )
+    assert explicit_default == baseline
+
+
+def test_all_on_matches_dataclass_default() -> None:
+    """All *algorithmic* refinements default on; parallel is opt-in."""
+    flags = RefinementConfig.from_dict(None)
+    algorithmic = [n for n in all_flag_names() if n != "parallel"]
+    assert all(getattr(flags, name) is True for name in algorithmic)
+    # parallel is opt-in because threading has overhead the user must
+    # explicitly accept (otherwise it changes reproducibility in
+    # subtle ways via thread scheduling).
+    assert flags.parallel is False
+
+
+def test_networkx_cross_check_shortcut_set() -> None:
+    """Cross-check shortcut-set reachability against networkx.descendants."""
+    if find_spec("networkx") is None:
+        pytest.skip("networkx not installed (dev-only cross-check)")
+
+    import networkx as nx
+
+    from reachq.graph import Digraph
+
+    g = Digraph()
+    for i in range(50):
+        for j in range(i + 1, 50):
+            if (i * 7 + j * 3) % 13 < 4:
+                g.add_edge(i, j)
+
+    nxg = nx.DiGraph()
+    nxg.add_nodes_from(g.vertices())
+    for u, v in g.edges():
+        nxg.add_edge(u, v)
+
+    shortcuts, _, _ = build_shortcut_set_for_reachability(
+        g,
+        omega=3.0,
+        random_seed=42,
+    )
+
+    # Build augmented graph and compare descendants.
+    aug = nx.DiGraph()
+    aug.add_nodes_from(nxg.nodes)
+    aug.add_edges_from(nxg.edges)
+    aug.add_edges_from(shortcuts)
+
+    for v in g.vertices():
+        ours = parallel_bfs(g, v, shortcuts)
+        theirs = nx.descendants(aug, v) | {v}
+        assert ours == theirs, f"networkx disagrees from {v}"

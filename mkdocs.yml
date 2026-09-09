@@ -1,0 +1,147 @@
+site_name: reachq
+site_description: Parallel shortcut sets and hopsets for reachability and shortest paths in dense digraphs.
+site_url: https://sachncs.github.io/reachq/
+site_author: Sachin
+
+repo_name: sachncs/reachq
+repo_url: https://github.com/sachncs/reachq
+edit_uri: edit/master/docs/
+
+docs_dir: docs
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/favicon.svg
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.follow
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/sachncs/reachq
+      name: reachq on GitHub
+  generator: false
+
+extra_css:
+  - assets/extra.css
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [reachq]
+          options:
+            docstring_style: google
+            show_root_heading: true
+            show_symbol_class_heading: true
+            show_symbol_class_toc: true
+            show_source: false
+            members_order: source
+            separate_signature: true
+            show_signature_annotations: true
+            signature_crossrefs: true
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.smartsymbols
+  - pymdownx.caret
+  - pymdownx.tilde
+  - pymdownx.mark
+  - pymdownx.keys
+
+nav:
+  - Overview: index.md
+  - Getting started:
+    - Install: getting-started.md
+    - Examples: examples.md
+  - Tutorials:
+    - Quick start (reachability): tutorials/quickstart-reachability.md
+    - Quick start (shortest paths): tutorials/quickstart-shortest-paths.md
+  - How it works:
+    - Algorithms: algorithms.md
+    - Architecture: architecture.md
+    - Work-depth model: work-depth.md
+    - Correctness: notes_correctness.md
+    - Invariants: invariants.md
+    - Refinement flags: algorithms.md
+  - API:
+    - Reference: reference.md
+  - Topics:
+    - Benchmarks: benchmarks.md
+    - Testing: testing.md
+    - Acceleration backends: accel.md
+    - Limitations: limitations.md
+    - Glossary: GLOSSARY.md
+    - FAQ: faq.md
+    - Deployment: deployment.md
+  - Research:
+    - Paper draft: PAPER.md
+    - Inspired by: INSPIRED_BY.md
+    - Spectral fixtures: spectral_fixtures.md
+    - Fix/Resample: fix_resample.md
+    - Streaming proof: streaming_proof.md
+    - Approximation analysis: approximation_analysis.md
+    - Historical review: HISTORICAL_ARCHITECTURE_REVIEW.md
+    - Lit survey: lit_survey.md
+  - Contributing:
+    - Why reachq: WHY.md
+    - Start here: START_HERE.md
+    - Contributing guide: https://github.com/sachncs/reachq/blob/master/CONTRIBUTING.md
+    - Code of conduct: https://github.com/sachncs/reachq/blob/master/CODE_OF_CONDUCT.md
+    - Security policy: https://github.com/sachncs/reachq/blob/master/SECURITY.md
+    - Migration to v0.9.0: migration_0_9.md
+    - Migration to v0.10.0 (DRAFT): migration_0_10.md
+    - Changelog: https://github.com/sachncs/reachq/blob/master/CHANGELOG.md

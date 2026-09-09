@@ -1,0 +1,19 @@
+[build-system]
+requires = ["maturin>=1.0"]
+build-backend = "maturin"
+
+[project]
+name = "reachq_rust_kernels"
+version = "0.1.0"
+description = "Rust acceleration kernels for reachq via PyO3"
+license = {text = "MIT"}
+
+[tool.maturin]
+# Build as a sub-module of the reachq package so it's importable as
+# `reachq.accel.rust._reachq_rust`. Maturin will create the .pth file
+# that exposes the .so file at this importable path.
+module-name = "reachq.accel.rust._reachq_rust"
+features = ["pyo3/extension-module"]
+# When `develop` is run, the extension is built and the compiled .so
+# is placed where `reachq.accel.rust.__init__` can import it. Without
+# `develop`, use `build` + manual copy or `pip install -e .` semantics.

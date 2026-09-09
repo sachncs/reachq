@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="reachq logo">
+  <title>reachq</title>
+  <defs>
+    <linearGradient id="reachq-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+    <linearGradient id="reachq-grad-soft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4F46E5" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#14B8A6" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer rounded square background -->
+  <rect width="256" height="256" rx="56" fill="url(#reachq-grad)"/>
+
+  <!-- Reachability network motif: nodes and edges behind the Q -->
+  <g stroke="#FFFFFF" stroke-opacity="0.32" stroke-width="3" fill="none">
+    <line x1="56" y1="80" x2="128" y2="80"/>
+    <line x1="128" y1="80" x2="200" y2="120"/>
+    <line x1="56" y1="80" x2="200" y2="120"/>
+    <line x1="56" y1="80" x2="128" y2="160"/>
+    <line x1="200" y1="120" x2="128" y2="160"/>
+    <line x1="128" y1="160" x2="200" y2="200"/>
+    <line x1="56" y1="80" x2="200" y2="200"/>
+  </g>
+
+  <!-- Nodes on the network -->
+  <g fill="#FFFFFF">
+    <circle cx="56"  cy="80"  r="6"/>
+    <circle cx="200" cy="120" r="6"/>
+    <circle cx="128" cy="160" r="6"/>
+    <circle cx="200" cy="200" r="6"/>
+  </g>
+
+  <!-- Stylised Q: a thick ring + an offset tail -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round">
+    <circle cx="138" cy="128" r="56"/>
+    <line x1="166" y1="156" x2="198" y2="188"/>
+  </g>
+
+  <!-- Highlight dot inside the Q (the "query" target) -->
+  <circle cx="138" cy="128" r="9" fill="#FFFFFF"/>
+</svg>
