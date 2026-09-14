@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://sachncs.github.io/reachq/"><img src="https://sachncs.github.io/reachq/assets/logo.svg" alt="reachq logo" width="120" /></a>
+  <a href="https://sachncs.github.io/reachq/"><img src="site/public/logo.svg" alt="reachq logo" width="120" /></a>
 </p>
 
 <h1 align="center">reachq</h1>
@@ -308,14 +308,17 @@ The full module responsibility table lives in [`docs/architecture.md`](docs/arch
 
 ## Documentation
 
-The full documentation site is built with MkDocs Material and deployed to GitHub Pages at [sachncs.github.io/reachq](https://sachncs.github.io/reachq/).
+The product landing page is built with Vite + React and lives in [`site/`](site). It is deployed to GitHub Pages at [sachncs.github.io/reachq](https://sachncs.github.io/reachq/).
 
-Build it locally:
+The reference documentation, algorithms, and architecture notes are written in Markdown under [`docs/`](docs) (MkDocs-compatible) and continue to ship in the repository alongside this page.
+
+Preview the product page locally:
 
 ```bash
-pip install -e ".[dev]" mkdocs mkdocs-material
-mkdocs serve             # preview at http://127.0.0.1:8000
-mkdocs build --strict    # build into ./site/
+cd site
+npm install
+npm run dev          # http://127.0.0.1:5173
+npm run build        # ./site/dist
 ```
 
 Notable entry points:
