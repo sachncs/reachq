@@ -28,10 +28,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: site/package-lock.json
       - run: npm ci --no-audit --no-fund
-      - name: Type-check
-        run: npx tsc --noEmit --listFiles 2>&1 | head -40
-      - name: Build
-        run: npm run build
+      - run: npm run build
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

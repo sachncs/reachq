@@ -25,6 +25,9 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+# reachq product page: re-allow site/src/lib/ (TypeScript helpers)
+!site/src/lib/
+!**/site/src/lib/
 
 # PyInstaller
 *.manifest
