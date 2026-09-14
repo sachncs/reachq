@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { LogoMark } from '@/components/LogoMark'
-import { cn } from '@/lib/cn'
+import { LogoMark } from '../components/LogoMark'
+import { cn } from '../lib/cn'
 import { Github, Menu, X } from 'lucide-react'
 
 const NAV_LINKS = [

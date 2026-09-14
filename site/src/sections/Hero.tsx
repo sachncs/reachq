@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { GraphCanvas } from '@/components/GraphCanvas'
+import { GraphCanvas } from '../components/GraphCanvas'
 import { ArrowRight, Github, Sparkles, Star } from 'lucide-react'
 
 const fadeUp = {
