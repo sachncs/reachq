@@ -54,7 +54,7 @@ dev = [
     "hypothesis>=6.0.0",
     "mypy>=1.0.0",
     "networkx>=3.0",
-    "ruff==0.16.6",  # keep in sync with .github/workflows/ci.yml
+    "ruff==0.16.8",  # keep in sync with .github/workflows/ci.yml
 ]
 research = [
     "networkx>=3.0",
