@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reachq"
-version = "0.9.0"
+dynamic = ["version"]
 description = "Parallel reachability and shortest-path algorithms on digraphs. Insertion-order vertex indexing, deterministic cross-process reproducibility, and Boolean-semiring transitive closure."
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
 requires-python = ">=3.10"
 authors = [
     {name = "Sachin <sachncs@gmail.com>"}
@@ -28,7 +28,6 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -84,6 +83,9 @@ Issues = "https://github.com/sachncs/reachq/issues"
 where = ["."]
 include = ["reachq*"]
 
+[tool.setuptools.dynamic]
+version = {attr = "reachq._version.__version__"}
+
 [tool.cibuildwheel]
 # The user-side [6.x] commit uploads built wheels via GitHub Release
 # artifacts. This block configures what cibuildwheel will build.
@@ -134,14 +136,4 @@ warn_return_any = true
 warn_unused_configs = true
 ignore_missing_imports = true
 exclude = "build/|site/|dist/"
-ignore_errors = true
 namespace_packages = true
-
-[[tool.mypy.overrides]]
-# Tests, scripts, benchmarks, and examples are dev tooling, not the
-# shipped library API: untyped helper bodies are lenient, but any
-# annotated function in these trees is still strictly checked (see
-# scripts/cli.py, which is fully annotated and must stay clean).
-module = ["tests.*", "scripts.*", "benchmarks.*", "examples.*"]
-disallow_untyped_defs = false
-check_untyped_defs = false

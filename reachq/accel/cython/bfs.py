@@ -54,7 +54,7 @@ def cy_bfs_forward(
         Boolean numpy array of length n.
     """
     if bfs_internals.is_available():
-        result_ext = bfs_internals.forward(indptr, indices, source, n, max_depth)
+        result_ext = bfs_internals.FORWARD(indptr, indices, source, n, max_depth)
         if isinstance(result_ext, np.ndarray):
             return result_ext
     # Fallback: pure-Python returns the indices of reached vertices;
@@ -92,7 +92,7 @@ def cy_bfs_backward(
         Boolean numpy array of length n.
     """
     if bfs_internals.is_available():
-        result_ext = bfs_internals.backward(
+        result_ext = bfs_internals.BACKWARD(
             indptr_rev, indices_rev, source, n, max_depth
         )
         if isinstance(result_ext, np.ndarray):

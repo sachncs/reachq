@@ -10,9 +10,6 @@ Only :mod:`reachq.hopset` imports from this module.
 
 from __future__ import annotations
 
-import math
-import random
-
 from reachq.graph import WeightedDigraph
 from reachq.shortest_paths import (
     compute_d_descendants,

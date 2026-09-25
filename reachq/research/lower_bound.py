@@ -141,7 +141,7 @@ def cycle_graph_dag(n: int) -> Digraph:
 
 __all__ = [
     'barbell_graph',
+    'cycle_graph_dag',
     'layered_dag',
     'long_path_dag',
-    'cycle_graph_dag',
 ]

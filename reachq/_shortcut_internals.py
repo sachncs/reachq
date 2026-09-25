@@ -17,7 +17,6 @@ from collections import deque
 
 from reachq.graph import Digraph
 
-
 PARALLEL_SPAWN_WARN_BELOW = 1000
 
 

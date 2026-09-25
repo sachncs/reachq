@@ -24,7 +24,7 @@ jobs:
           pip install -e ".[dev]"
       - name: Concurrency tests
         run: |
-          pytest tests/test_algorithm_concurrency.py tests/test_reproducibility_subprocess.py tests/test_hopset_weight_accuracy.py -v
+          pytest tests/test_algorithm_concurrency.py tests/test_reproducibility_subprocess.py tests/test_hopset_soundness.py -v
       - name: Stress process pool
         run: |
           python -c "

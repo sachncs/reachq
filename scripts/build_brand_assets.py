@@ -10,7 +10,6 @@ Pure-Pillow drawing, no SVG rendering dependency.
 
 from __future__ import annotations
 
-import math
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -33,9 +32,9 @@ def gradient(size: tuple[int, int], c1: tuple[int, int, int], c2: tuple[int, int
     for y in range(h):
         for x in range(w):
             t = (x + y) / denom
-            r = int(round(c1[0] * (1 - t) + c2[0] * t))
-            g = int(round(c1[1] * (1 - t) + c2[1] * t))
-            b = int(round(c1[2] * (1 - t) + c2[2] * t))
+            r = round(c1[0] * (1 - t) + c2[0] * t)
+            g = round(c1[1] * (1 - t) + c2[1] * t)
+            b = round(c1[2] * (1 - t) + c2[2] * t)
             px[x, y] = (r, g, b)
     return img
 

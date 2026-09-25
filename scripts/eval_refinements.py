@@ -75,8 +75,8 @@ def hopbound_actual(graph, source: object, shortcuts, beta: float) -> tuple[int,
 def run_one(
     graph, flags: dict[str, bool], seed: int, omega: float, max_seconds: int
 ) -> dict[str, object]:
-    from reachq.shortcut import build_shortcut_set_for_reachability
     from reachq.reachability import bfs_reachability, parallel_bfs
+    from reachq.shortcut import build_shortcut_set_for_reachability
 
     row: dict[str, object] = {
         "n": graph.num_vertices(),

@@ -77,7 +77,7 @@ class Digraph:
             self.out_edges.setdefault(v, empty_adjacency(self))
             self.in_edges.setdefault(v, empty_adjacency(self))
 
-    def __empty_adjacency(self) -> set[object]:  # noqa: D401 - name-mangled
+    def __empty_adjacency(self) -> set[object]:
         """Subclass hook (name-mangled); returns the empty adjacency container.
 
         :class:`WeightedDigraph` overrides this with a dict-of-int
@@ -286,10 +286,10 @@ class WeightedDigraph(Digraph):
 
     def __init__(self) -> None:
         super().__init__()
-        self.out_edges: dict[object, dict[object, int]] = {}
-        self.in_edges: dict[object, dict[object, int]] = {}
+        self.out_edges: dict[object, dict[object, int]] = {}  # type: ignore[assignment]
+        self.in_edges: dict[object, dict[object, int]] = {}  # type: ignore[assignment]
 
-    def __empty_adjacency(self) -> dict[object, int]:  # noqa: D401 - name-mangled
+    def __empty_adjacency(self) -> dict[object, int]:
         """Subclass hook (name-mangled); returns an empty dict adjacency.
 
         Called only via the :func:`empty_adjacency` free function

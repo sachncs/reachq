@@ -25,7 +25,7 @@ from __future__ import annotations
 
 import heapq
 import itertools
-from collections.abc import Callable
+from collections.abc import Callable, Iterable
 from typing import TYPE_CHECKING
 
 from reachq.errors import ReachqGraphError, ReachqValueError

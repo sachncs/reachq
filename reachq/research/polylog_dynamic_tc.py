@@ -403,8 +403,8 @@ def polylog_incremental_tc(
 
 
 __all__ = [
-    'chunk_count',
-    'bit_index',
-    'polylog_incremental_tc',
     'PolylogDynamicTC',
+    'bit_index',
+    'chunk_count',
+    'polylog_incremental_tc',
 ]

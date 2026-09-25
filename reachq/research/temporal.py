@@ -222,8 +222,8 @@ def from_temporal_edges(
 
 
 __all__ = [
-    'temporal_bfs',
+    'TemporalDigraph',
     'earliest_arrival',
     'from_temporal_edges',
-    'TemporalDigraph',
+    'temporal_bfs',
 ]

@@ -20,7 +20,6 @@ from setuptools import Extension, setup
 
 from reachq.accel.cython import _setup_helpers as helpers
 
-
 setup(
     name="reachq_cython_kernels",
     ext_modules=[

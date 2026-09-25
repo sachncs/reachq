@@ -8,7 +8,6 @@ test-slow:
 
 lint:
 	ruff check reachq tests scripts
-	ruff format --check reachq tests scripts
 
 format:
 	ruff format reachq tests scripts

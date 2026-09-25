@@ -129,7 +129,7 @@ def paper_beta(graph: Digraph, omega: float = 3.0) -> float:
 
 
 __all__ = [
-    'bfs_depth',
     'adaptive_beta',
+    'bfs_depth',
     'paper_beta',
 ]

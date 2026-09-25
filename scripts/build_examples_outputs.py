@@ -13,7 +13,6 @@ Run with:
 from __future__ import annotations
 
 import json
-import os
 import random
 import sys
 from pathlib import Path
@@ -21,22 +20,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from reachq.generators import (  # noqa: E402
-    cycle_graph,
-    layered_dag,
-    path_graph,
-    petersen_graph,
+from reachq.generators import (
     random_dag,
 )
-from reachq.graph import Digraph, WeightedDigraph  # noqa: E402
-from reachq.hopset import build_hopset_for_sssp  # noqa: E402
-from reachq.invariants import (  # noqa: E402
-    assert_distance_approximation,
-    assert_reachability_preserved,
-)
-from reachq.reachability import bfs_reachability, parallel_bfs  # noqa: E402
-from reachq.shortcut import build_shortcut_set_for_reachability  # noqa: E402
-from reachq.shortest_paths import dijkstra, shortest_path_hopbound  # noqa: E402
+from reachq.graph import Digraph, WeightedDigraph
+from reachq.hopset import build_hopset_for_sssp
+from reachq.reachability import bfs_reachability, parallel_bfs
+from reachq.shortcut import build_shortcut_set_for_reachability
+from reachq.shortest_paths import dijkstra, shortest_path_hopbound
 
 OUT_DIR = ROOT / "docs" / "examples" / "outputs"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -168,8 +159,7 @@ def hopset_demo() -> dict:
     for v in g.vertices():
         if v in exact and v in approx and exact[v] > 0:
             r = approx[v] / exact[v]
-            if r > max_ratio:
-                max_ratio = r
+            max_ratio = max(max_ratio, r)
     return {
         "n": g.num_vertices(),
         "m": g.num_edges(),

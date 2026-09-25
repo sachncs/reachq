@@ -29,8 +29,6 @@ the same API with somewhat lower performance.
 
 from __future__ import annotations
 
-from typing import Any
-
 import numpy as np
 
 from reachq.accel.rust import _internals as internals

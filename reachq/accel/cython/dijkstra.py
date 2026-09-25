@@ -80,7 +80,7 @@ def cy_dijkstra(
         Float64 numpy array of length n.
     """
     if dijkstra_internals.is_available():
-        result = dijkstra_internals.extension(
+        result = dijkstra_internals.EXTENSION(
             indptr, indices, weights, source, n
         )
         if isinstance(result, np.ndarray):

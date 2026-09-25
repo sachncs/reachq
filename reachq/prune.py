@@ -10,6 +10,8 @@ multiplication exponent omega.
 
 from __future__ import annotations
 
+from collections.abc import Iterable
+
 from reachq.closure import transitive_closure_on_subset
 from reachq.graph import Digraph
 

@@ -24,7 +24,6 @@ from typing import cast
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from reachq.shortcut import build_shortcut_set_for_reachability
 from reachq.config import get_logger
 from reachq.generators import (
     hamming_graph,
@@ -38,6 +37,7 @@ from reachq.research.fix_resample import (
     fix_resample_reachable,
     fix_resample_shortcut_set,
 )
+from reachq.shortcut import build_shortcut_set_for_reachability
 
 log = get_logger("reachq.fix_resample_eval")
 

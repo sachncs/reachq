@@ -18,7 +18,6 @@ import signal
 import time
 from collections.abc import Iterator
 
-from reachq.shortcut import build_shortcut_set_for_reachability
 from reachq.config import get_logger
 from reachq.generators import (
     SNAP_DATASETS,
@@ -29,6 +28,7 @@ from reachq.generators import (
 from reachq.graph import Digraph, WeightedDigraph
 from reachq.hopset import build_hopset_for_sssp
 from reachq.reachability import bfs_reachability, parallel_bfs
+from reachq.shortcut import build_shortcut_set_for_reachability
 from reachq.shortest_paths import dijkstra, shortest_path_hopbound
 
 log = get_logger("reachq.benchmark_large")

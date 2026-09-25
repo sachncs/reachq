@@ -15,16 +15,16 @@ from typing import cast
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from reachq.shortcut import build_shortcut_set_for_reachability
 from reachq.config import get_logger
 from reachq.graph import Digraph
 from reachq.research.closed_form import (
     binary_tree_dag,
     layered_dag_shortcut_set,
-    upper_bound_paper,
     path_shortcut_set,
+    upper_bound_paper,
 )
 from reachq.research.sparsify import sparsify_shortcut_set
+from reachq.shortcut import build_shortcut_set_for_reachability
 
 log = get_logger("reachq.closed_form_eval")
 

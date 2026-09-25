@@ -186,6 +186,6 @@ def fix_resample_reachable(
 
 
 __all__ = [
-    'fix_resample_shortcut_set',
     'fix_resample_reachable',
+    'fix_resample_shortcut_set',
 ]

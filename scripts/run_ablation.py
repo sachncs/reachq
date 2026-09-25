@@ -63,9 +63,9 @@ def main() -> int:
     parser.add_argument("--out", default="results/ablation.csv")
     args = parser.parse_args()
 
-    from reachq.shortcut import build_shortcut_set_for_reachability
     from reachq.generators import random_dag, weighted_random_dag
     from reachq.hopset import build_hopset_for_sssp
+    from reachq.shortcut import build_shortcut_set_for_reachability
 
     rows: list[dict[str, object]] = []
     all_on = {n: True for n in FLAG_NAMES}

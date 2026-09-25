@@ -16,7 +16,6 @@ import time
 from collections.abc import Sequence
 from typing import Any
 
-from reachq.shortcut import build_shortcut_set_for_reachability
 from reachq.config import configure_logging, get_logger
 from reachq.generators import (
     dense_graph,
@@ -26,7 +25,7 @@ from reachq.generators import (
 )
 from reachq.graph import Digraph
 from reachq.reachability import bfs_reachability, parallel_bfs
-
+from reachq.shortcut import build_shortcut_set_for_reachability
 
 configure_logging()
 log = get_logger("reachq.benchmark_reachability")

@@ -18,6 +18,7 @@ Direct functions:
 from __future__ import annotations
 
 from collections import deque
+from collections.abc import Iterator
 from typing import TYPE_CHECKING
 
 from reachq.errors import ReachqGraphError
@@ -190,7 +191,7 @@ def strongly_connected_components(graph: Digraph) -> list[list[object]]:
     for v in graph.iter_vertices():
         if v in visited:
             continue
-        stack: list[tuple[object, object]] = [(v, iter(out.get(v, set())))]
+        stack: list[tuple[object, Iterator[object]]] = [(v, iter(out.get(v, set())))]
         visited.add(v)
         while stack:
             node, children = stack[-1]

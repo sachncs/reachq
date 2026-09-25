@@ -11,7 +11,6 @@ This script demonstrates end-to-end usage of:
 import random
 import time
 
-from reachq.shortcut import build_shortcut_set_for_reachability
 from reachq.graph import Digraph, WeightedDigraph
 from reachq.hopset import build_hopset_for_sssp
 from reachq.reachability import (
@@ -19,6 +18,7 @@ from reachq.reachability import (
     parallel_bfs,
     strongly_connected_components,
 )
+from reachq.shortcut import build_shortcut_set_for_reachability
 from reachq.shortest_paths import astar, dijkstra, shortest_path_hopbound
 
 

@@ -178,7 +178,7 @@ def assert_partition_correctness(
 
 def assert_distance_approximation(
     graph: WeightedDigraph,
-    hopset: dict[tuple[object, object], float],
+    hopset: dict[tuple[object, object], int],
     source: object,
     epsilon: float,
     max_hops: int,

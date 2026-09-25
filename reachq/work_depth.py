@@ -135,13 +135,13 @@ class SpanProfiler:
 
     def begin_phase(self, name: str) -> None:
         """Start timing ``name``."""
-        self._SpanProfiler__close_current()
+        self.__close_current()
         self.current_name = name
         self.current_start = time.perf_counter()
 
     def end_phase(self) -> None:
         """Close the current phase and record its wall-clock time."""
-        self._SpanProfiler__close_current()
+        self.__close_current()
 
     def __close_current(self) -> None:
         """Name-mangled helper: record the open phase and reset state."""
@@ -154,7 +154,7 @@ class SpanProfiler:
 
     def total_span_seconds(self) -> float:
         """Sum of phase wall-clock times. Lower bound on true PRAM span."""
-        self._SpanProfiler__close_current()
+        self.__close_current()
         return sum(p.seconds for p in self.phases)
 
     def summary(self) -> dict[str, float]:
@@ -162,7 +162,7 @@ class SpanProfiler:
         ``theoretical_depth``, and one ``phase_<name>_seconds``
         entry per recorded phase.
         """
-        self._SpanProfiler__close_current()
+        self.__close_current()
         result: dict[str, float] = {
             "span_seconds": self.total_span_seconds(),
             "theoretical_work": self.theoretical_work,

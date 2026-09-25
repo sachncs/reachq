@@ -22,18 +22,16 @@ from typing import Any
 
 from reachq.config import configure_logging, get_logger
 from reachq.generators import (
-    dense_graph,
+    graph_with_sccs,
+    path_graph,
     random_dag,
     weighted_dense_graph,
     weighted_random_dag,
-    graph_with_sccs,
-    path_graph,
 )
 from reachq.graph import Digraph, WeightedDigraph
 from reachq.hopset import build_hopset_for_sssp
-from reachq.reachability import bfs_reachability, parallel_bfs
+from reachq.reachability import parallel_bfs
 from reachq.shortest_paths import dijkstra, shortest_path_hopbound
-
 
 configure_logging()
 log = get_logger("reachq.benchmark_shortest_paths")

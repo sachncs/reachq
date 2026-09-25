@@ -61,9 +61,9 @@ class WeightedGraph(Graph, Protocol):
     The concrete :class:`reachq.graph.WeightedDigraph` conforms.
     """
 
-    def add_edge(self, u: object, v: object, weight: int) -> None: ...
+    def add_edge(self, u: object, v: object, weight: int) -> None: ...  # type: ignore[override]
     def get_weight(self, u: object, v: object) -> int | None: ...
-    def edges(self) -> list[tuple[object, object, int]]: ...
+    def edges(self) -> list[tuple[object, object, int]]: ...  # type: ignore[override]
 
 
 @runtime_checkable

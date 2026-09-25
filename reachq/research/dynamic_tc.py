@@ -248,6 +248,6 @@ def incremental_tc(
 
 
 __all__ = [
-    'incremental_tc',
     'DynamicTransitiveClosure',
+    'incremental_tc',
 ]

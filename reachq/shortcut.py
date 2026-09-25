@@ -44,20 +44,18 @@ from typing import Any
 
 import numpy as np
 
-from reachq.config import get_logger
-from reachq.csr import build_csr_pair
-from reachq.graph import Digraph, partition_by_labels
-from reachq.reachability import bfs_reachability, reverse_bfs_reachability
-from reachq.trace import trace
 from reachq._shortcut_internals import (
     PARALLEL_SPAWN_WARN_BELOW,
     bfs_reachable,
     build_labels,
-    deque_hop_limited_bfs,
     expand_one_pivot,
     sample_pivots,
     validate_algorithm_params,
 )
+from reachq.config import get_logger
+from reachq.csr import build_csr_pair
+from reachq.graph import Digraph, partition_by_labels
+from reachq.trace import trace
 
 MIN_CSR_VERTICES = 500
 
@@ -542,8 +540,8 @@ def build_shortcut_set_for_reachability(
             if trivial:
                 shortcuts.add((u_idx, v_idx))
             else:
-                u_rep = representatives[int(u_idx)]
-                v_rep = representatives[int(v_idx)]
+                u_rep = representatives[int(u_idx)]  # type: ignore[call-overload]
+                v_rep = representatives[int(v_idx)]  # type: ignore[call-overload]
                 shortcuts.add((u_rep, v_rep))
 
         return shortcuts, beta, realised_bound

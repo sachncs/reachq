@@ -296,9 +296,9 @@ def sketch_reachability_streaming(
 
 
 __all__ = [
+    'HyperLogLogSketch',
     'alpha',
     'leading_zero_count',
     'sketch_reachability_estimate',
     'sketch_reachability_streaming',
-    'HyperLogLogSketch',
 ]
