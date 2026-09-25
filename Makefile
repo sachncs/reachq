@@ -1,4 +1,4 @@
-.PHONY: test test-slow lint typecheck bench docs clean
+.PHONY: test test-slow lint typecheck bench clean
 
 test:
 	pytest -x -q
@@ -18,9 +18,6 @@ typecheck:
 
 bench:
 	python -m benchmarks.bench_jls_construction
-
-docs:
-	mkdocs build --strict
 
 clean:
 	rm -rf build dist *.egg-info .mypy_cache .ruff_cache .pytest_cache .coverage htmlcov

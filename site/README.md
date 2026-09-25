@@ -1,69 +1,41 @@
 # reachq product page
 
-The marketing site for **reachq** — a Python library for parallel shortcut
-sets and hopsets on dense digraphs.
+This folder contains the Astro source for the public reachq launch page:
 
-This folder is the source of the public product page published at
-https://sachncs.github.io/reachq.
+https://sachncs.github.io/reachq/
 
-The source-of-truth documentation for the library itself still lives in
-[`../docs`](../docs) and the project README in [`../README.md`](../README.md);
-this page does **not** render markdown or docs — it is a hand-crafted product
-landing page.
+The launch page explains the product, onboarding path, core constructions,
+performance boundaries, limitations, documentation map, and contribution path.
+The library documentation itself remains in ../docs.
 
 ## Stack
 
-- [Vite](https://vitejs.dev) + [React](https://react.dev) + TypeScript
-- [Tailwind CSS](https://tailwindcss.com)
-- [Framer Motion](https://www.framer.com/motion/) for refined motion
-- [Lucide](https://lucide.dev) icons
-- No content is rendered from `.md` / `.mdx` files — everything is JSX.
+- Astro: https://astro.build/
+- Static output for GitHub Pages
+- Plain HTML, CSS, SVG, and a small client-side script
+- Static HTML, CSS, SVG, and a small client-side script
 
 ## Develop
 
-```bash
+~~~bash
 cd site
 npm install
-npm run dev        # http://127.0.0.1:5173
-npm run build      # produces ./dist
-npm run preview    # serve the production build locally
-```
+npm run dev
+npm run build
+npm run preview
+~~~
 
-## Structure
-
-```
-site/
-├── index.html                 # entry HTML + SEO + OG meta
-├── public/
-│   ├── favicon.svg
-│   ├── logo.svg
-│   └── robots.txt
-├── src/
-│   ├── main.tsx               # React root
-│   ├── App.tsx                # composes the sections
-│   ├── index.css              # Tailwind base + design tokens + components
-│   ├── components/            # reusable UI (LogoMark, NavBar, GraphCanvas)
-│   ├── sections/              # one file per page section
-│   └── lib/cn.ts              # clsx + tailwind-merge helper
-├── tailwind.config.js
-├── postcss.config.js
-├── tsconfig*.json
-├── vite.config.ts
-└── package.json
-```
+The production output is site/dist/.
 
 ## Deployment
 
-`.github/workflows/pages.yml` builds and publishes `site/dist` to GitHub
-Pages on every push to `master` / `main`.
+.github/workflows/pages.yml builds the Astro site with Node 22 and publishes
+site/dist through the GitHub Pages Actions deployment. The workflow checks
+for the generated HTML and brand assets before uploading the artifact.
 
-The site uses `base: './'` in `vite.config.ts` so it works whether deployed
-at `https://sachncs.github.io/reachq/` or a custom domain in the future.
 
-## Design notes
+## Brand assets
 
-- Apple-like restraint, generous spacing, strong typography.
-- Cinematic dark background with a single indigo → teal accent gradient.
-- Subtle radial light, low-opacity noise, and an animated layered-DAG SVG as
-  the hero visual signal (shortcut edges drawn as dashed animated strokes).
-- No emoji, no flashy marketing visuals — refined, premium, production-shaped.
+- public/logo.svg — light horizontal lockup for README/docs surfaces
+- public/logo-reversed.svg — dark-background lockup for the launch page
+- public/favicon.svg — directed-graph app icon

@@ -1,4 +1,4 @@
-name: Build and deploy reachq product page
+name: Build and deploy Astro product page
 
 on:
   push:
@@ -28,7 +28,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: site/package-lock.json
       - run: npm ci --no-audit --no-fund
-      - run: npm run build
+      - name: Build Astro site
+        run: npm run build
+      - name: Verify Astro output
+        run: |
+          test -f dist/index.html
+          test -f dist/favicon.svg
+          test -f dist/logo.svg
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
