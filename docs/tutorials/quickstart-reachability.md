@@ -2,7 +2,8 @@
 
 This 5-minute tutorial shows you how to compute a shortcut set,
 verify it preserves reachability, and answer reachability queries
-faster than naive BFS.
+and compare it with a direct BFS baseline. The tutorial does not claim a
+runtime improvement for every graph.
 
 ## Goal
 
@@ -25,9 +26,9 @@ g = random_dag(n=1000, edge_probability=0.1, random_seed=42)
 print(f"Graph: {g.num_vertices()} vertices, {g.num_edges()} edges")
 ```
 
-A random DAG with 1000 vertices and edge probability 0.1 has about
-1000 × 999 / 2 × 0.1 = ~50000 edges, so the construction runs in
-a few seconds.
+A random DAG with 1000 vertices and edge probability 0.1 is a useful
+deterministic test input. Record construction and query time on your own
+machine rather than assuming a fixed runtime.
 
 ## 2. Build a shortcut set
 

@@ -50,11 +50,11 @@ cited authors. The contributions of `reachq` are:
 
 - **Four documented correctness fixes.** A corrigendum
   documents four bugs found in the reference implementation and
-  fixed here (see `docs/notes_correctness.md`).
+  fixed here (see `docs/research/notes-correctness.md`).
 
 - **A test fixture library** from the algebraic-graph-theory
   literature (Petersen, Paley, Shrikhande, Hamming, see
-  `docs/spectral_fixtures.md`) for regression-testing the
+  `docs/research/experimental/spectral-fixtures.md`) for regression-testing the
   construction across graph classes.
 
 ## What `reachq` does NOT contribute

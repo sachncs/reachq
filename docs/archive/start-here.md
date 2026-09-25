@@ -4,20 +4,20 @@ Where you go next depends on what you want to do with `reachq`.
 
 ## I want to use the library
 
-Read [Getting started](getting-started.md) for installation and a
+Read [Getting started](../getting-started.md) for installation and a
 minimal example. The canonical entry point is
 `reachq.build_shortcut_set_for_reachability`.
 
-If you prefer learning by example, read [Examples](examples.md)
+If you prefer learning by example, read [Examples](../examples.md)
 for five end-to-end applications.
 
 ## I want to understand the algorithms
 
-Read [Algorithms](algorithms.md) for what the construction is
+Read [Algorithms](../algorithms.md) for what the construction is
 doing. For the algorithmic content (two lemmas from the
 parallel-reachability literature plus the contributions layered
-on top of them), read [Paper](PAPER.md). For a shorter overview,
-read [Why reachq](WHY.md).
+on top of them), read [Paper](../research/paper-mapping.md). For a shorter overview,
+read [Why reachq](why.md).
 
 ## I want to extend the library
 
@@ -32,4 +32,4 @@ for the pattern. The shortest path from idea to pull request is:
 ## I want to file a bug or ask a question
 
 [Open a GitHub issue](https://github.com/sachncs/reachq/issues).
-See [FAQ](faq.md) for common questions.
+See [FAQ](../faq.md) for common questions.

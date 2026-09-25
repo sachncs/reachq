@@ -99,15 +99,13 @@ DAG. Returns (shortcut_set, beta) where beta is the target hopbound.
 
 The wrapper accepts a `flags: RefinementConfig` argument (also
 re-exported as `reachq.Flags`) that toggles the post-processing
-refinements described in `docs/PAPER.md`:
+refinements described in `docs/research/paper-mapping.md`:
 
 | Flag | Effect |
 |---|---|
 | `skip_condense` | Skip the SCC-contraction step. Faster on dense graphs; unsafe on graphs with cycles. |
 | `skip_trivial_part` | Skip the trivial singleton parts at the recursion base. |
 | `degree_ordered_pivots` | Order pivots by degree (highest first). |
-| `label_compress` | Compress labels to consecutive integers before recursion. |
-| `hop_bounded_bfs` | Use a hop-bounded BFS kernel instead of the full BFS (currently no-op; reserved for the accel path). |
 | `enable_tc_pruning` | Apply TC-Pruning (Theorem 2's improvement). |
 
 The default `RefinementConfig` enables all of these. Use

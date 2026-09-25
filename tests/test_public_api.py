@@ -15,5 +15,5 @@ def test_top_level_api_and_version_are_consistent() -> None:
 
     assert expected <= set(reachq.__all__)
     assert reachq.__version__ == version("reachq")
-    for name in expected:
+    for name in reachq.__all__:
         assert getattr(reachq, name) is not None

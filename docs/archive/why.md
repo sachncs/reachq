@@ -52,6 +52,6 @@ reachq only for the specific parallel-reachability shortcuts.
 
 - [`docs/START_HERE.md`](START_HERE.md) for the routing question
   "I want to use / understand / extend the library".
-- [`docs/PAPER.md`](PAPER.md) for the algorithmic content.
-- [`docs/INSPIRED_BY.md`](INSPIRED_BY.md) for the relationship to the
+- [`docs/research/paper-mapping.md`](../research/paper-mapping.md) for the algorithmic content.
+- [`docs/research/provenance.md`](../research/provenance.md) for the relationship to the
   cited papers.

@@ -19,9 +19,7 @@ PAPER_TC = {
     "enable_tc_pruning": True,
     "tight_tc_trigger": False,
     "adaptive_sampling": False,
-    "label_compress": False,
     "skip_condense": False,
-    "hop_bounded_bfs": False,
     "degree_ordered_pivots": False,
     "skip_trivial_part": False,
 }
@@ -29,9 +27,6 @@ PAPER_TC = {
 TIGHT_TC = {**PAPER_TC, "tight_tc_trigger": True}
 
 NO_TC = {**PAPER_TC, "enable_tc_pruning": False}
-
-HOP_BOUNDED = {**NO_TC, "hop_bounded_bfs": True}
-
 
 def run(g, refinement: dict, seed: int):
     return build_shortcut_set_for_reachability(
@@ -82,9 +77,9 @@ def test_lemma_2_2_size_contribution_property(n, p, seed):
 )
 @settings(max_examples=20, deadline=None, suppress_health_check=[HealthCheck.too_slow])
 def test_lemma_3_2_reachability_correctness_hop_bounded_property(n, p, seed):
-    """Lemma 3.2: hop-bounded BFS preserves reachability."""
+    """The augmented traversal preserves reachability."""
     g = random_dag(n=n, edge_probability=p, random_seed=seed)
-    shortcuts, _, _ = run(g, HOP_BOUNDED, seed)
+    shortcuts, _, _ = run(g, NO_TC, seed)
     for v in g.vertices():
         original = bfs_reachability(g, v)
         augmented = parallel_bfs(g, v, shortcuts)

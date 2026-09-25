@@ -24,7 +24,7 @@ Bernstein, Probst Gutenberg, and Saranurak (2026).
 
 ### What is NOT implemented?
 
-See [Limitations](limitations.md) for the consolidated list. The
+See [Limitations](concepts/limitations.md) for the consolidated list. The
 short version:
 
 - True PRAM parallelism. Python does not support the PRAM model.
@@ -53,7 +53,7 @@ are not auto-installed. Install them directly with
 
 ### Why is `pip install reachq` not working?
 
-A PyPI release is on the Roadmap. Until it ships, install from
+A PyPI release is not available for the current snapshot. Install from
 source: `pip install -e ".[dev]"` from a fresh clone.
 
 ## Usage
@@ -118,7 +118,7 @@ GIL-bound in Python.
 ### My construction runs out of memory on large graphs. What now?
 
 `reachq` is honest about its scaling limits. The
-[Limitations](limitations.md) page documents where the wall-clock
+[Limitations](concepts/limitations.md) page documents where the wall-clock
 and memory ceilings sit. Strategies that help:
 
 - Reduce graph size before construction.
@@ -148,6 +148,6 @@ See [CONTRIBUTING.md](https://github.com/sachncs/reachq/blob/master/CONTRIBUTING
 ## Getting help
 
 - [Open an issue](https://github.com/sachncs/reachq/issues).
-- Read the [API reference](reference.md).
-- Read the [Algorithms](algorithms.md) page for theoretical background.
-- Read [Examples](examples.md) for end-to-end applications.
+- Read the [API reference](reference/index.md).
+- Read the [Algorithms](concepts/algorithms.md) page for theoretical background.
+- Read [Examples](getting-started/examples.md) for canonical usage and illustrative integrations.

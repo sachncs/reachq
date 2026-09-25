@@ -1,10 +1,10 @@
 # Examples
 
 The [`examples/`](https://github.com/sachncs/reachq/tree/master/examples)
-directory ships end-to-end applications that show what `reachq` is
-useful for. Each example is short (under 100 lines), uses only the
-public API, and is paired with a deterministic output below so you
-can read this page without running anything.
+directory ships small, illustrative integration sketches. They show how a
+reachq construction can be composed with a domain-shaped graph; they do not
+establish a domain-specific quality or runtime benefit. Each example is short,
+uses the public API, and is paired with deterministic output below.
 
 The numbers below come from running each script with the listed
 seed and parameters. To regenerate:
@@ -22,7 +22,7 @@ The output is written to [`docs/examples/outputs/examples.json`](examples/output
 | [GNN preprocessing](#gnn-preprocessing) | Citation graph | Shortcuts augment a sparse citation graph for a downstream GNN. |
 | [RAG reranking](#rag-reranking) | Passage citation | Pivot-reach ranking for retrieval-augmented generation. |
 | [Compiler inlining](#compiler-inlining) | IR graph | Shortcut edges surface inlining candidates. |
-| [Social network](#social-network) | SNAP-style citation | Empirical `|H| / |E|` ratio on a denser random DAG. |
+| [Social network](#social-network) | Synthetic directed graph | Construction-size ratio on a small deterministic graph. |
 | [Bioinformatics](#bioinformatics) | PPI network | Downstream-hub detection in a synthetic protein-interaction network. |
 | [Hopset demo](#hopset-demo) | Weighted SSSP | `(1 + ε)` distance approximation in action. |
 
@@ -39,10 +39,9 @@ The output is written to [`docs/examples/outputs/examples.json`](examples/output
 | Realised bound | 7 |
 | `|H| / |E|` | 4.388 |
 
-The shortcut set is 4.4× larger than the edge set. That sounds
-expensive, but in a GNN pipeline the shortcuts pre-compute
-2-hop reachability, so the per-batch message passing skips the
-intermediate hop.
+The shortcut set is 4.4× larger than the edge set. This is a construction-size
+observation for the supplied synthetic graph, not evidence of a GNN training
+or inference improvement.
 
 **Run it yourself:**
 
@@ -62,9 +61,9 @@ python examples/gnn_preprocessing.py
 | Direct citations from `d0` | 5 |
 | Top-ranked neighbours (sample) | `d10`, `d13`, `d2`, `d20`, `d68` |
 
-Pivot-reach ranking reorders passages by their shortcut-derived
-distance from the seed document. The top-ranked neighbours include
-`d10`, `d13`, `d2`, `d20`, and `d68`, in that order.
+Pivot-reach ranking reorders passages by a shortcut-derived graph signal. The
+listed neighbours are deterministic output for this synthetic input; no
+retrieval-quality claim is implied.
 
 **Run it yourself:**
 
@@ -85,8 +84,8 @@ python examples/rag_reranking.py
 
 The shortcut set surfaces the high-in-degree vertices: blocks 107
 and 118 with 22 and 21 incoming edges respectively. These are the
-prime inlining candidates — every call site that can reach them
-will benefit from inlining once.
+possible candidates for further compiler analysis. The example does not run a
+compiler or establish that inlining them improves generated code.
 
 **Run it yourself:**
 
@@ -96,19 +95,19 @@ python examples/compiler_inlining.py
 
 ## Social network
 
-**Graph:** 500 vertices, density 0.01, random seed 42.
+**Graph:** 100 vertices, edge probability 0.05, random seed 42.
 
 | Metric | Value |
 | ------ | ----- |
 | Vertices | 500 |
-| Edges | 1230 |
-| Shortcuts | 5857 |
-| Asymptotic β | 17.855 |
-| `|H| / |E|` | 4.762 |
+| Edges | 224 |
+| Shortcuts | 915 |
+| Asymptotic β | 8.17 |
+| `|H| / |E|` | 4.08 |
 
-A sparser random DAG produces a similar `|H| / |E|` ratio to the
-GNN example. The shortcut-set cost is amortised by the per-query
-speedup on dense reachability questions.
+A small synthetic directed graph produces a `|H| / |E|` ratio of 4.08 for
+this seed. The ratio is a construction-size measurement only; query
+amortisation and runtime need a separate workload benchmark.
 
 **Run it yourself:**
 
@@ -128,10 +127,10 @@ python examples/social_network.py
 | Asymptotic β | 10.067 |
 | Downstream hubs (2-hop from `P0`) | 196 |
 
-A 200-protein PPI network with random activation edges has 38227
-shortcut edges. From a query protein `P0`, 196 of the other 199
-proteins are reachable within 2 hops once the shortcuts are
-applied — effectively a full sweep of the network.
+A 200-protein synthetic interaction graph has 38227 shortcut edges. From a
+query protein `P0`, 196 of the other 199 vertices are reachable within the
+demonstration's two-hop query. This is a graph-algorithm example, not a claim
+about biological connectivity.
 
 **Run it yourself:**
 
@@ -170,7 +169,7 @@ source-target pair. On larger graphs the `(1 + ε)` slack kicks in.
 **Run it yourself:**
 
 ```bash
-python examples/compiler_inlining.py   # noqa — this is a placeholder; see scripts/build_examples_outputs.py
+python scripts/build_examples_outputs.py
 ```
 
 (The hopset demo lives in `scripts/build_examples_outputs.py`.)
@@ -184,5 +183,5 @@ python examples/compiler_inlining.py   # noqa — this is a placeholder; see scr
 - Outputs are tiny by design — these are sketches, not
   production pipelines. The point is to show the API surface,
   not to benchmark.
-- Each example is paired with a regression test where useful; see
-  `tests/test_examples_smoke.py` if it exists in your checkout.
+- The scripts are illustrative and should be run with their documented seed
+  before using their output in a benchmark or application decision.

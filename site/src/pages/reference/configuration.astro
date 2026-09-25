@@ -2,7 +2,7 @@
 import DocsLayout from '../../layouts/DocsLayout.astro'
 ---
 <DocsLayout title="Configuration reference" kicker="17 / reference" description="Validated algorithmic toggles and runtime configuration.">
-  <p><code>RefinementConfig</code> is a frozen dataclass. Its current fields are <code>adaptive_sampling</code>, <code>label_compress</code>, <code>skip_condense</code>, <code>hop_bounded_bfs</code>, <code>degree_ordered_pivots</code>, <code>tight_tc_trigger</code>, <code>skip_trivial_part</code>, <code>enable_tc_pruning</code>, and <code>parallel</code>.</p>
+  <p><code>RefinementConfig</code> is a frozen dataclass. Its current fields are <code>adaptive_sampling</code>, <code>skip_condense</code>, <code>degree_ordered_pivots</code>, <code>tight_tc_trigger</code>, <code>skip_trivial_part</code>, <code>enable_tc_pruning</code>, and <code>parallel</code>.</p>
   <p>Defaults are enabled for algorithmic refinements and disabled for process parallelism. Unknown dictionary keys raise <code>ValueError</code>.</p>
   <p>See <a href="/reachq/guides/parameters.html">parameter guidance</a> for when to override these values.</p>
 </DocsLayout>

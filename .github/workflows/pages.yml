@@ -32,6 +32,8 @@ jobs:
         run: npm run build
       - name: Check rendered links and stale output
         run: npm run check-links
+      - name: Check Astro diagnostics
+        run: npm run lint
       - name: Verify Astro output
         run: |
           test -f dist/index.html

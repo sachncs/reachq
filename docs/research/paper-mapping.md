@@ -3,14 +3,14 @@
 > **Historical draft.** This document is a unified paper draft kept
 > for the record. Section 5.1's `StreamingShortcutSet` claim and
 > Section 5.2's `greedy_shortcut_set` claim do not match the current
-> implementation; see [`docs/limitations.md`](limitations.md) for
+> implementation; see [`docs/concepts/limitations.md`](../concepts/limitations.md) for
 > the current state. The current test count is in CHANGELOG.md; do
 > not hard-code counts here.
 
 This document is the unified paper draft. It consolidates the
 previous `paper_innovations.md`, `paper_refinements.md`, and
 `paper_contribution.md` into a single canonical source. The
-relationship to the cited papers is in [`docs/INSPIRED_BY.md`](INSPIRED_BY.md).
+relationship to the cited papers is in [`docs/research/provenance.md`](provenance.md).
 
 ## 1. Background
 
@@ -56,7 +56,7 @@ computes a graph-aware β from the empirical eccentricity of a sample
 of source vertices, scaled by a safety factor. The two estimates
 diverge on dense graphs and converge on sparse ones.
 
-## 3. Five engineering refinements
+## 3. Three engineering refinements
 
 These are the post-processing refinements (Innovation #3-#7 from the
 paper draft). All default to on, all individually toggleable.
@@ -67,15 +67,9 @@ paper draft). All default to on, all individually toggleable.
 2. **Degree-ordered pivot iteration.** Pivots are processed in
    ascending out-degree order, so cheap BFSes finish first
    (`RefinementConfig.degree_ordered_pivots`).
-3. **Label compression.** Labels are stored as `frozenset[int]`
-   pivot IDs instead of `set[str]`, reducing memory and hashing cost
-   (`RefinementConfig.label_compress`).
-4. **Skip-trivial-partition guard.** When the partition has only one
+3. **Skip-trivial-partition guard.** When the partition has only one
    part, the recursion cannot shrink, so we return immediately
    (`RefinementConfig.skip_trivial_part`).
-5. **Hop-bounded BFS in the pivot loop.** The pivot BFS is bounded
-   at the wrapper's β estimate
-   (`RefinementConfig.hop_bounded_bfs`).
 
 ## 4. Bound gap analysis
 
@@ -95,7 +89,7 @@ Both are distinct from the cited papers.
 Maintains a shortcut set under edge insertions. **Experimental
 prototype; no formal bound yet** (the design intent is amortised
 O(log² n) per insertion, but the current implementation does not
-achieve it). See [`docs/streaming_proof.md`](streaming_proof.md)
+achieve it). See [`docs/research/experimental/streaming-proof.md`](experimental/streaming-proof.md)
 for the honest sketch. Distinct from the paper's batch construction.
 (`reachq.research.streaming.StreamingShortcutSet`)
 

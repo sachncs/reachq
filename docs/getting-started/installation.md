@@ -17,8 +17,8 @@ pip install -e ".[dev]"
 ```
 
 The `.[dev]` extra pulls in `pytest`, `hypothesis`, `mypy`, and
-`ruff`. A PyPI release is on the Roadmap; until then, install
-from a clone.
+`ruff`. There is no PyPI release for the current development snapshot; install
+from a source checkout.
 
 ## Verify the install
 
@@ -53,7 +53,7 @@ shortcuts, beta, realised_bound = build_shortcut_set_for_reachability(
 # 3. Soundness: shortcut set preserves reachability for every source.
 assert_reachability_preserved(g, shortcuts)
 
-# 4. Now reachability queries are fast.
+# 4. Query the augmented graph and compare it with the original.
 sources = (g.vertices()[0], g.vertices()[len(g.vertices()) // 2])
 for src in sources:
     assert parallel_bfs(g, src, shortcuts) == bfs_reachability(g, src)
@@ -92,12 +92,12 @@ dispatch when `refinement.parallel=True` and
 
 ## Where to go next
 
-- [Examples](examples.md) — five end-to-end applications with rendered outputs.
+- [Examples](examples.md) — canonical usage and illustrative integrations.
 - [Quick start: reachability](tutorials/quickstart-reachability.md) — reachability in depth.
 - [Quick start: shortest paths](tutorials/quickstart-shortest-paths.md) — hopsets in depth.
-- [Algorithms](algorithms.md) — what the construction is doing.
-- [API reference](reference.md) — every public function.
-- [Limitations](limitations.md) — what is not implemented.
+- [Algorithms](../concepts/algorithms.md) — what the construction is doing.
+- [API reference](../reference/index.md) — every public function.
+- [Limitations](../concepts/limitations.md) — what is not implemented.
 
 ## Troubleshooting
 
@@ -121,6 +121,6 @@ Install `pyarrow` directly with `pip install pyarrow`. The
 Install `networkx` directly with `pip install networkx`. The
 `reachq[research]` extra does include `networkx`, but only when
 you install with `pip install reachq[research]` from PyPI; for
-now, install it directly.
+now, install it directly from the source checkout.
 
 For more, see the [FAQ](faq.md) or open an [issue](https://github.com/sachncs/reachq/issues).

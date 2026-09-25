@@ -33,9 +33,7 @@ class RefinementConfig:
     """Per-call toggle for algorithmic refinements. Default: all on."""
 
     adaptive_sampling: bool = True
-    label_compress: bool = True
     skip_condense: bool = True
-    hop_bounded_bfs: bool = True
     degree_ordered_pivots: bool = True
     tight_tc_trigger: bool = True
     skip_trivial_part: bool = True
@@ -44,7 +42,7 @@ class RefinementConfig:
 
     @classmethod
     def from_dict(cls, d: dict[str, bool] | None = None) -> RefinementConfig:
-        """Construct from a partial dict. Missing keys default to True."""
+        """Construct from a partial dict using the class defaults."""
         if not d:
             return cls()
         valid = {f.name for f in fields(cls)}

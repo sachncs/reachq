@@ -17,9 +17,7 @@ PAPER_TC = {
     "enable_tc_pruning": True,
     "tight_tc_trigger": False,
     "adaptive_sampling": False,
-    "label_compress": False,
     "skip_condense": False,
-    "hop_bounded_bfs": False,
     "degree_ordered_pivots": False,
     "skip_trivial_part": False,
 }
@@ -27,9 +25,6 @@ PAPER_TC = {
 TIGHT_TC = {**PAPER_TC, "tight_tc_trigger": True}
 
 NO_TC = {**PAPER_TC, "enable_tc_pruning": False}
-
-HOP_BOUNDED = {**NO_TC, "hop_bounded_bfs": True}
-
 
 def run(g, refinement: dict, seed: int):
     return build_shortcut_set_for_reachability(
@@ -104,12 +99,12 @@ def test_lemma_2_2_size_contribution(seed: int) -> None:
 
 @pytest.mark.parametrize("seed", [1, 2, 3, 7, 42])
 def test_lemma_3_1_hopbound_preserved(seed: int) -> None:
-    """Lemma 3.1: hop-bounded pivot BFS preserves the beta-hopbound.
+    """The shortcut construction preserves its realised beta-hopbound.
 
     Empirically: max observed hop from any source is <= beta.
     """
     g = random_dag(n=80, edge_probability=0.2, random_seed=seed)
-    for flags, label in ((NO_TC, "no_tc"), (HOP_BOUNDED, "hop_bounded")):
+    for flags, label in ((NO_TC, "no_tc"),):
         shortcuts, beta, realised = run(g, flags, seed)
         for src in list(g.vertices())[:10]:
             max_obs = hopbound_max(g, src, shortcuts, beta)
@@ -120,9 +115,9 @@ def test_lemma_3_1_hopbound_preserved(seed: int) -> None:
 
 @pytest.mark.parametrize("seed", [1, 2, 3, 7, 42])
 def test_lemma_3_2_reachability_correctness_hop_bounded(seed: int) -> None:
-    """Lemma 3.1 corollary: hop-bounded BFS preserves reachability."""
+    """The augmented traversal preserves reachability."""
     g = random_dag(n=80, edge_probability=0.2, random_seed=seed)
-    shortcuts, _, _ = run(g, HOP_BOUNDED, seed)
+    shortcuts, _, _ = run(g, NO_TC, seed)
     for v in g.vertices():
         original = bfs_reachability(g, v)
         augmented = parallel_bfs(g, v, shortcuts)

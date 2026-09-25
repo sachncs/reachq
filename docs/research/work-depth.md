@@ -101,4 +101,4 @@ Both `build_shortcut_set_for_reachability` and `build_hopset_for_sssp`
 accept a `parallel_workers: int = 1` argument. The current
 implementation is sequential; the parameter is accepted for API
 symmetry with the future multi-process path. See
-[`docs/algorithms.md`](algorithms.md) for the full semantic note.
+[`docs/concepts/algorithms.md`](../concepts/algorithms.md) for the full semantic note.

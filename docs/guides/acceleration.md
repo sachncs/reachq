@@ -1,13 +1,13 @@
 # Acceleration Backends (experimental, not shipped)
 
 `reachq/accel/` contains optional, **experimental** scaffolding for native
-kernels (Cython, Rust, Numba) plus Dask/Ray/GraphBLAS hooks. It is **not
-part of the PyPI wheel**: `pip install reachq` gives you a pure-Python
-package with no JIT and no native extensions.
+kernels (Cython, Rust, Numba) plus Dask/Ray/GraphBLAS hooks. The current
+development snapshot is installed from source and the package artifacts built
+by CI contain only the pure-Python fallback path.
 
 ## What ships vs what does not
 
-| Component | In the PyPI wheel / sdist? |
+| Component | In the current package artifacts? |
 |---|---|
 | `reachq.core.*` pure-Python algorithms | yes |
 | `reachq.accel` wrapper modules + pure-Python fallbacks (`bfs.py`, `dijkstra.py`, `setup.py`) | yes |
@@ -23,10 +23,10 @@ build dependencies (`cython`), it does not compile anything.
 
 ## Status and support
 
-- **Experimental.** These backends are scaffold, not a supported feature.
+- **Experimental.** These backends are scaffolding, not a supported feature.
   They are not exercised by CI beyond the pure-Python fallback path, and
-  the speedups in this document are illustrative, not measured against
-  the shipped package.
+  no runtime improvement is promised until a backend has a build path,
+  correctness coverage, and reproducible measurements.
 - The only behavior guaranteed and tested is the fallback: every wrapper
   falls back to the pure-Python implementations in `reachq.bfs` and
   `reachq.shortest_paths` when the compiled extension is absent
@@ -36,8 +36,8 @@ build dependencies (`cython`), it does not compile anything.
 
 ## If you build them anyway
 
-This requires a **git checkout** of the repo — the kernel sources are
-not in the PyPI wheel or sdist. Building the Cython kernels requires a C
+This requires a **git checkout** of the repo — the kernel sources are not in
+the current package artifacts. Building the Cython kernels requires a C
 compiler and numpy headers:
 
 ```bash
@@ -52,11 +52,11 @@ backend builds with `maturin develop --release` in `reachq/accel/rust`.
 
 ## Backend overview
 
-| Backend | Build tool | Speedup vs pure-Python (illustrative) |
+| Backend | Build tool | Current status |
 |---|---|---|
-| **Cython** | `python setup.py build_ext` | 5-50x for CSR BFS, 3-10x for Dijkstra |
-| **Numba** | none (JIT-compiles on first call) | 3-30x after warmup |
-| **Rust** | `maturin develop --release` | 10-100x for hot loops |
+| **Cython** | `python setup.py build_ext` | Experimental source-only path |
+| **Numba** | JIT at first call | Experimental source-only path |
+| **Rust** | `maturin develop --release` | Experimental source-only path |
 
 All expose the same Python API:
 

@@ -36,5 +36,5 @@ structure already supports it (`greedy_shortcut_set` would gain a
 `prob_skip` parameter).
 
 **Empirical validation.** See `tests/test_approximation.py` for
-random DAG experiments, and the paper draft (`docs/PAPER.md`) for
+random DAG experiments, and the paper mapping (`docs/research/paper-mapping.md`) for
 the full lemma statement.

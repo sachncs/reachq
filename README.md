@@ -76,9 +76,14 @@ assert parallel_bfs(graph, source, shortcuts) == bfs_reachability(graph, source)
 For weighted shortest paths:
 
 ~~~python
+from reachq import WeightedDigraph
 from reachq.hopset import build_hopset_for_sssp
 from reachq.shortest_paths import dijkstra, shortest_path_hopbound
 
+weighted_graph = WeightedDigraph()
+weighted_graph.add_edge(0, 1, 1)
+weighted_graph.add_edge(1, 2, 2)
+weighted_graph.add_edge(0, 2, 10)
 hopset, beta = build_hopset_for_sssp(
     weighted_graph,
     epsilon=0.1,
@@ -96,13 +101,16 @@ The hopset path exposes the approximation parameter; compare it with an exact ba
 Use the [product page](https://sachncs.github.io/reachq/) for the project story, status, and entry points.
 
 - [Install and first construction](https://sachncs.github.io/reachq/getting-started.html)
-- [Reachability tutorial](https://sachncs.github.io/reachq/tutorials/quickstart-reachability/)
-- [Shortest-path tutorial](https://sachncs.github.io/reachq/tutorials/quickstart-shortest-paths/)
+- [Reachability tutorial](https://sachncs.github.io/reachq/tutorials/quickstart-reachability.html)
+- [Shortest-path tutorial](https://sachncs.github.io/reachq/tutorials/quickstart-shortest-paths.html)
 - [Algorithms and refinements](https://sachncs.github.io/reachq/algorithms.html)
 - [API reference](https://sachncs.github.io/reachq/reference.html)
 - [Examples](https://sachncs.github.io/reachq/examples.html)
 - [Benchmarks](https://sachncs.github.io/reachq/benchmarks.html)
 - [Limitations](https://sachncs.github.io/reachq/limitations.html)
+
+The [project status](https://sachncs.github.io/reachq/status.html) page defines
+the supported, experimental, and historical boundaries.
 
 The documentation separates supported usage from research notes and historical material. Start with the [documentation home](https://sachncs.github.io/reachq/).
 
@@ -120,7 +128,7 @@ source files live in [docs/](docs/) and remain readable in the repository.
 
 ## Research and citation
 
-The constructions are informed by *Parallel Reachability and Shortest Paths on Non-sparse Digraphs* by Ashvinkumar, Bernstein, Probst Gutenberg, and Saranurak. See the [research and provenance notes](https://sachncs.github.io/reachq/INSPIRED_BY.html) for the relationship between the paper, the implementation, and experimental extensions.
+The constructions are informed by *Parallel Reachability and Shortest Paths on Non-sparse Digraphs* by Ashvinkumar, Bernstein, Probst Gutenberg, and Saranurak. See the [research and provenance notes](https://sachncs.github.io/reachq/research/provenance.html) for the relationship between the paper, the implementation, and experimental extensions.
 
 ## Contributing
 
