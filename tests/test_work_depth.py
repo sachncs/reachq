@@ -115,21 +115,20 @@ class TestSpanProfiler:
         assert s["span_seconds"] == 0.0
         assert s["theoretical_work"] == 0.0
 
-    def test_phases_accumulate(self):
-        import time as _t
-
+    def test_phases_accumulate(self, monkeypatch):
+        from reachq import work_depth
         from reachq.work_depth import SpanProfiler
+
+        clock = iter((0.0, 0.01, 0.01, 0.02))
+        monkeypatch.setattr(work_depth.time, "perf_counter", lambda: next(clock))
 
         p = SpanProfiler()
         p.begin_phase("a")
-        _t.sleep(0.01)
         # begin_phase closes the previous phase, so 'a' is recorded.
         p.begin_phase("b")
-        _t.sleep(0.01)
         p.end_phase()
         span = p.total_span_seconds()
-        # a + b = ~20ms minimum; allow slack
-        assert span >= 0.02, f"expected >= 20ms, got {span}"
+        assert span == 0.02
         assert len(p.phases) == 2
         assert {ph.name for ph in p.phases} == {"a", "b"}
 
