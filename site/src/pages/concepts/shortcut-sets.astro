@@ -1,0 +1,11 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Shortcut sets" kicker="05 / concept" description="A shortcut set adds directed edges so reachability can be queried on an augmented graph without changing the reachable relation.">
+  <h2>Model</h2>
+  <p>Given a directed graph <code>G</code>, the construction returns a set <code>H</code> of directed pairs. Queries operate on <code>G ∪ H</code>; the preservation invariant checks that every source reaches the same vertices as it did in <code>G</code>.</p>
+  <h2>Construction</h2>
+  <p><code>build_shortcut_set_for_reachability</code> handles cyclic input through strongly connected components and then constructs shortcuts over the resulting structure. The returned realised bound is derived from the executed recursion, not inferred from a benchmark.</p>
+  <h2>Query</h2>
+  <p>Use <code>bfs_reachability</code> for the original graph and <code>parallel_bfs</code> with <code>shortcut_edges</code> for the augmented traversal. Always validate the invariant for the graph family and parameters you care about.</p>
+</DocsLayout>

@@ -30,6 +30,8 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Build Astro site
         run: npm run build
+      - name: Check rendered links and stale output
+        run: npm run check-links
       - name: Verify Astro output
         run: |
           test -f dist/index.html
@@ -37,6 +39,12 @@ jobs:
           test -f dist/reference.html
           test -f dist/limitations.html
           test -f dist/tutorials/quickstart-reachability.html
+          test -f dist/status.html
+          test -f dist/getting-started/installation.html
+          test -f dist/concepts/shortcut-sets.html
+          test -f dist/guides/benchmarking.html
+          test -f dist/reference/graphs.html
+          test -f dist/research/provenance.html
           test -f dist/favicon.svg
           test -f dist/logo.svg
       - uses: actions/configure-pages@v6

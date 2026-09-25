@@ -1,0 +1,15 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Contributing" kicker="22 / project" description="A small contribution path for a personal, pre-1.0 open-source project.">
+  <h2>Local setup</h2>
+  <pre><code>python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
+pytest
+ruff check reachq tests scripts
+mypy reachq</code></pre>
+  <h2>Before opening a pull request</h2>
+  <p>Add tests for behavior changes, update the relevant user or research documentation, and add a changelog entry for public behavior changes. Keep the public top-level API deliberate; experimental work belongs under <code>reachq.research</code> or an explicitly marked optional backend.</p>
+  <p>Read the repository <a href="https://github.com/sachncs/reachq/blob/master/CONTRIBUTING.md" target="_blank" rel="noreferrer">contribution guide ↗</a> for the full workflow.</p>
+</DocsLayout>

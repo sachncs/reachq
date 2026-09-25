@@ -1,0 +1,17 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Project status" kicker="00 / orientation" description="reachq is a pre-1.0, source-first Python library. This page defines what is supported today and where the project is deliberately cautious.">
+  <h2>Supported today</h2>
+  <ul>
+    <li>Directed and weighted directed graph primitives with insertion-order vertex indexing.</li>
+    <li>Reachability shortcut-set construction and exact reachability-preservation checks.</li>
+    <li>Weighted hopset construction and bounded-hop shortest-path queries with explicit epsilon.</li>
+    <li>Deterministic seeded construction, serialization helpers, CLI smoke paths, and invariants.</li>
+  </ul>
+  <h2>Experimental boundary</h2>
+  <p>Modules under <code>reachq.research</code> and optional acceleration backends are useful for exploration, but are not part of the pre-1.0 stability contract. Research notes explain the relationship to the cited paper; they do not expand the supported API.</p>
+  <h2>Release status</h2>
+  <p>The current development snapshot is <code>0.9.0.dev0</code>. There is no PyPI release or Git tag for this snapshot, so installation from a source checkout is the supported path.</p>
+  <div class="docs-callout"><p><strong>Adoption rule:</strong> treat measured behavior and the current tests as the contract. Read <a href="/reachq/limitations.html">limitations</a> before using a construction in production.</p></div>
+</DocsLayout>

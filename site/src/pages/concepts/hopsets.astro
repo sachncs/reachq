@@ -1,0 +1,11 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Hopsets" kicker="06 / concept" description="A weighted hopset adds distance-preserving links so a shortest path can be represented with a bounded number of hops.">
+  <h2>Model</h2>
+  <p>The hopset construction returns weighted pairs <code>(u, v) → w</code>. <code>shortest_path_hopbound</code> searches the original weighted graph together with those pairs, subject to <code>max_hops</code>.</p>
+  <h2>Approximation contract</h2>
+  <p>The explicit contract is checked by comparing bounded-hop distances against exact Dijkstra distances. The implementation uses <code>epsilon</code> as the multiplicative tolerance. The current tests cover this behavior on finite graph families; they do not make an unconditional performance promise.</p>
+  <h2>Reproducibility</h2>
+  <p>Pass both <code>random_seed</code> and, when byte-stable cross-machine output matters, an explicit <code>omega</code>. The default omega is aware of the detected BLAS vendor.</p>
+</DocsLayout>

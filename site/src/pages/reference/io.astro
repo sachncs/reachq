@@ -1,0 +1,11 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="I/O reference" kicker="16 / reference" description="Serialization entry points and optional integration boundaries.">
+  <ul>
+    <li><code>reachq.io</code> — core graph dump/load helpers.</li>
+    <li><code>reachq.io_networkx</code> — optional NetworkX conversion.</li>
+    <li><code>reachq.io_arrow</code> — optional Arrow-oriented integration.</li>
+  </ul>
+  <p>Optional modules are not imported by <code>import reachq</code>. Keep optional dependencies out of the core installation path.</p>
+</DocsLayout>

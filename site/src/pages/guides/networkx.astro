@@ -1,0 +1,8 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="NetworkX integration" kicker="12 / guide" description="Use a general-purpose graph library for graph manipulation and pass a reachq graph when you need these constructions.">
+  <h2>Boundary</h2>
+  <p>reachq is intentionally not a replacement for NetworkX or igraph. Convert at the boundary of your workflow, then keep the construction and validation steps explicit.</p>
+  <p>The optional adapter lives in <code>reachq.io_networkx</code> and is not imported by the core package. Install the research/development dependencies that your adapter workflow needs and test the conversion on your own vertex types.</p>
+</DocsLayout>

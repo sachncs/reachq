@@ -1,0 +1,21 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Parameters" kicker="09 / guide" description="Use the stable call-site parameters first; treat refinement toggles as algorithmic experiments, not product modes.">
+  <h2>Primary parameters</h2>
+  <ul>
+    <li><code>random_seed</code> makes seeded construction reproducible.</li>
+    <li><code>epsilon</code> sets the hopset approximation budget.</li>
+    <li><code>omega</code> controls the conservative exponent used for construction parameters.</li>
+    <li><code>parallel_workers</code> only matters when the reachability refinement enables process dispatch.</li>
+  </ul>
+  <h2>RefinementConfig</h2>
+  <p><code>RefinementConfig()</code> enables the implemented refinements by default and keeps <code>parallel</code> disabled by default. Use <code>RefinementConfig.from_dict</code> for a partial, validated override.</p>
+  <pre><code>from reachq.config import RefinementConfig
+
+refinement = RefinementConfig(
+    parallel=True,
+    enable_tc_pruning=False,
+)</code></pre>
+  <p>Individual flags are implementation-level controls. They are documented because they are public inputs, but their names do not imply independent theoretical guarantees.</p>
+</DocsLayout>

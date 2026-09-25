@@ -1,0 +1,7 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Exceptions reference" kicker="18 / reference" description="Errors that callers should handle at the supported API boundary.">
+  <p>Graph and value validation use the project error types where the implementation documents them. Invalid sources, negative hop limits, invalid epsilon/k/omega values, and closure budgets fail explicitly rather than silently returning a plausible result.</p>
+  <p>When writing an integration, test the error path for the parameters your application accepts. Error messages are part of the debugging experience, not a substitute for input validation.</p>
+</DocsLayout>

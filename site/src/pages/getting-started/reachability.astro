@@ -1,0 +1,25 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Reachability" kicker="02 / getting started" description="Construct shortcuts for exact reachability queries, then verify the preservation invariant explicitly.">
+  <h2>Canonical workflow</h2>
+  <pre><code>from reachq.generators import random_dag
+from reachq.invariants import assert_reachability_preserved
+from reachq.reachability import bfs_reachability, parallel_bfs
+from reachq.shortcut import build_shortcut_set_for_reachability
+
+graph = random_dag(n=100, edge_probability=0.1, random_seed=42)
+shortcuts, beta, realised_bound = build_shortcut_set_for_reachability(
+    graph, omega=3.0, random_seed=42,
+)
+assert_reachability_preserved(graph, shortcuts)
+source = graph.vertices()[0]
+assert parallel_bfs(graph, source, shortcuts) == bfs_reachability(graph, source)</code></pre>
+  <h2>What the return values mean</h2>
+  <ul>
+    <li><code>shortcuts</code> is a set of directed vertex pairs.</li>
+    <li><code>beta</code> is the asymptotic target quantity used by the construction.</li>
+    <li><code>realised_bound</code> is the bound derived by the executed recursion and is the value tests should use.</li>
+  </ul>
+  <p><code>parallel_bfs</code> currently simulates the reachability primitive sequentially. Construction-level process dispatch is opt-in and should be benchmarked for the graph size at hand.</p>
+</DocsLayout>

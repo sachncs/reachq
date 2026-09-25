@@ -1,0 +1,12 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Reachability reference" kicker="14 / reference" description="Traversal, connected-component, and shortcut-set entry points for directed graphs.">
+  <pre><code>from reachq.reachability import (
+    bfs_reachability,
+    parallel_bfs,
+    strongly_connected_components,
+)
+from reachq.shortcut import build_shortcut_set_for_reachability</code></pre>
+  <p><code>bfs_reachability</code> traverses the original graph. <code>parallel_bfs</code> accepts optional shortcut edges but currently executes a sequential traversal. The construction wrapper returns <code>(shortcuts, beta, realised_bound)</code>.</p>
+</DocsLayout>

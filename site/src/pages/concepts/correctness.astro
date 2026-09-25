@@ -1,0 +1,11 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Correctness" kicker="07 / concept" description="Separate formal assumptions, implementation behavior, and the invariants that are actually tested.">
+  <h2>Reachability</h2>
+  <p>The preservation check compares reachability in the original graph with reachability after adding shortcut edges. It is an exact relation, not a sampled quality score.</p>
+  <h2>Shortest paths</h2>
+  <p>The distance check computes an exact baseline with Dijkstra and compares it with the bounded-hop result under the supplied epsilon and hop limit. Unreachable vertices are excluded from the ratio comparison.</p>
+  <h2>What tests do not prove</h2>
+  <p>Passing tests do not prove a universal runtime improvement, a theorem for every untested graph family, or a particular parallel speedup. Those claims require their own assumptions and measurements.</p>
+</DocsLayout>

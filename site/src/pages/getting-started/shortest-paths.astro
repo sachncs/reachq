@@ -1,0 +1,24 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Shortest paths" kicker="03 / getting started" description="Build a weighted hopset and compare bounded-hop distances with an exact Dijkstra baseline.">
+  <h2>Canonical workflow</h2>
+  <pre><code>from reachq import WeightedDigraph
+from reachq.hopset import build_hopset_for_sssp
+from reachq.invariants import assert_distance_approximation
+
+graph = WeightedDigraph()
+graph.add_edge("a", "b", 1)
+graph.add_edge("b", "c", 2)
+graph.add_edge("a", "c", 10)
+
+hopset, beta = build_hopset_for_sssp(
+    graph, epsilon=0.1, random_seed=42, omega=3.0,
+)
+assert_distance_approximation(
+    graph, hopset, source="a", epsilon=0.1, max_hops=20,
+)</code></pre>
+  <h2>Interpret the result</h2>
+  <p><code>epsilon</code> is the allowed multiplicative approximation budget used by the invariant check. <code>beta</code> is a construction quantity, not a wall-clock speedup. The current hopset construction is sequential Python code.</p>
+  <p>Use <a href="/reachq/guides/benchmarking.html">benchmarking guidance</a> to record exact and bounded-hop query times separately.</p>
+</DocsLayout>

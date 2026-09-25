@@ -1,0 +1,15 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Benchmarking" kicker="11 / guide" description="Make benchmark results reproducible enough to inspect, compare, and challenge.">
+  <h2>Record the full context</h2>
+  <ul>
+    <li>reachq version or commit, Python version, operating system, and CPU.</li>
+    <li>Graph source and type, <code>n</code>, <code>m</code>, density, vertex ordering, and random seed.</li>
+    <li>Algorithm, epsilon, omega, refinement configuration, workers, and hop limit.</li>
+    <li>Construction time, query time, peak memory, output size, beta, realised bound, hopbound, and approximation error.</li>
+  </ul>
+  <h2>Keep claim types separate</h2>
+  <p>Theoretical bounds, microbenchmarks, and end-to-end measurements answer different questions. Do not use beta alone as a practical-performance proxy, and do not report an application benefit without an explicit experiment.</p>
+  <p>Reproducible scripts live in the <a href="https://github.com/sachncs/reachq/tree/master/scripts" target="_blank" rel="noreferrer">repository scripts ↗</a>.</p>
+</DocsLayout>

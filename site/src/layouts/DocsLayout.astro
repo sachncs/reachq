@@ -1,5 +1,6 @@
 ---
 import '../docs.css'
+import '../docs-index.css'
 
 const { title, kicker, description } = Astro.props
 ---
@@ -21,6 +22,7 @@ const { title, kicker, description } = Astro.props
         <nav aria-label="Documentation navigation">
           <a href="/reachq/getting-started.html">Start here</a>
           <a href="/reachq/reference.html">Reference</a>
+          <a href="/reachq/status.html">Status</a>
           <a href="/reachq/limitations.html">Limits</a>
           <a href="https://github.com/sachncs/reachq" target="_blank" rel="noreferrer">GitHub ↗</a>
         </nav>
@@ -33,6 +35,36 @@ const { title, kicker, description } = Astro.props
       <div class="docs-content">
         <slot />
       </div>
+      <aside class="docs-index" aria-label="Documentation map">
+        <div>
+          <strong>Learn</strong>
+          <a href="/reachq/getting-started/installation.html">Installation</a>
+          <a href="/reachq/getting-started/reachability.html">Reachability</a>
+          <a href="/reachq/getting-started/shortest-paths.html">Shortest paths</a>
+          <a href="/reachq/getting-started/examples.html">Examples</a>
+        </div>
+        <div>
+          <strong>Understand</strong>
+          <a href="/reachq/concepts/shortcut-sets.html">Shortcut sets</a>
+          <a href="/reachq/concepts/hopsets.html">Hopsets</a>
+          <a href="/reachq/concepts/correctness.html">Correctness</a>
+          <a href="/reachq/concepts/limitations.html">Limitations</a>
+        </div>
+        <div>
+          <strong>Build</strong>
+          <a href="/reachq/guides/parameters.html">Parameters</a>
+          <a href="/reachq/guides/serialization.html">Serialization</a>
+          <a href="/reachq/guides/benchmarking.html">Benchmarking</a>
+          <a href="/reachq/reference.html">API reference</a>
+        </div>
+        <div>
+          <strong>Project</strong>
+          <a href="/reachq/research/provenance.html">Research</a>
+          <a href="/reachq/project/contributing.html">Contributing</a>
+          <a href="/reachq/project/roadmap.html">Roadmap</a>
+          <a href="/reachq/archive.html">Archive</a>
+        </div>
+      </aside>
     </main>
     <footer class="docs-footer docs-shell">
       <span>Graph reachability, queryable.</span>

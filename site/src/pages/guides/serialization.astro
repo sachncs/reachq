@@ -1,0 +1,13 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Serialization" kicker="10 / guide" description="Persist graph structures with the supported I/O helpers and validate a round trip before using the data in a pipeline.">
+  <h2>Supported helpers</h2>
+  <p>The <code>reachq.io</code> module provides <code>dump</code>/<code>load</code> for directed graphs and weighted variants for weighted graphs. Optional NetworkX and Arrow integrations are separate modules.</p>
+  <pre><code>from reachq.io import dump, load
+
+dump(graph, "graph.json")
+restored = load("graph.json")
+assert restored.vertices() == graph.vertices()</code></pre>
+  <p>Keep the package version and graph schema with persisted data. Serialization compatibility is part of the pre-1.0 project surface only to the extent covered by the round-trip tests.</p>
+</DocsLayout>

@@ -1,0 +1,13 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Shortest-path reference" kicker="15 / reference" description="Exact and bounded-hop shortest-path functions for weighted directed graphs.">
+  <pre><code>from reachq.shortest_paths import (
+    dijkstra,
+    shortest_path,
+    shortest_path_hopbound,
+    truncated_dijkstra,
+)
+from reachq.hopset import build_hopset_for_sssp</code></pre>
+  <p><code>dijkstra</code> returns exact source distances. <code>shortest_path_hopbound</code> searches the original graph plus hopset edges with a maximum hop count. It returns a mapping for vertices reachable within that budget.</p>
+</DocsLayout>

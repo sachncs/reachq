@@ -1,0 +1,12 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Implementation notes" kicker="21 / research" description="Engineering choices that affect reproducibility or interpretation of the current algorithms.">
+  <ul>
+    <li>Vertices retain insertion order so seeded runs do not depend on hash iteration order.</li>
+    <li>The hopset path can use a BLAS-aware omega estimate; pass an explicit omega when byte-stable output matters.</li>
+    <li>The reachability construction uses a CSR representation above an implementation threshold and a deque fallback below it.</li>
+    <li>Process-level dispatch is opt-in and uses spawned workers; construction and query performance must be measured separately.</li>
+  </ul>
+  <p>These are implementation facts, not universal complexity or speed claims.</p>
+</DocsLayout>

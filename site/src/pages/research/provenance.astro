@@ -1,0 +1,14 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Research provenance" kicker="19 / research" description="How the implementation relates to the cited paper, engineering refinements, and experimental work.">
+  <h2>Supported implementation</h2>
+  <p>The core constructions are informed by <em>Parallel Reachability and Shortest Paths on Non-sparse Digraphs</em> by Ashvinkumar, Bernstein, Probst Gutenberg, and Saranurak.</p>
+  <h2>Three different claims</h2>
+  <ul>
+    <li>A theorem in the paper is a literature result under its assumptions.</li>
+    <li>A reachq implementation is the behavior exercised by its code and tests.</li>
+    <li>A benchmark is a measurement for a specified graph, machine, commit, and parameter set.</li>
+  </ul>
+  <p>Read the <a href="https://github.com/sachncs/reachq/blob/master/docs/INSPIRED_BY.md" target="_blank" rel="noreferrer">provenance notes ↗</a> and <a href="/reachq/archive.html">archive</a> for historical context.</p>
+</DocsLayout>

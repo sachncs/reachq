@@ -1,0 +1,17 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Installation" kicker="01 / getting started" description="Set up a source checkout with the same dependencies used by the test suite and examples.">
+  <h2>Supported environment</h2>
+  <p>Use Python 3.10 through 3.13. The core install requires NumPy 1.21 or newer and SciPy 1.10 or newer. The project is pre-1.0 and is currently installed from source.</p>
+  <pre><code>git clone https://github.com/sachncs/reachq.git
+cd reachq
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -e ".[dev]"</code></pre>
+  <h2>Verify the checkout</h2>
+  <pre><code>python -c "import reachq; print(reachq.__version__)"
+reachq --help
+pytest -q</code></pre>
+  <p>The package build and wheel smoke test are also run in CI. A published PyPI installation path will be documented when a real release artifact exists.</p>
+</DocsLayout>

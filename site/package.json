@@ -8,7 +8,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "lint": "astro check"
+    "lint": "astro check",
+    "check-links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "astro": "^5.13.7"

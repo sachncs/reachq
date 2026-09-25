@@ -1,0 +1,10 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Graph primitives" kicker="13 / reference" description="The graph containers used by the supported algorithms.">
+  <h2><code>Digraph</code></h2>
+  <p>Use <code>Digraph</code> for directed, unweighted graphs. Vertices retain insertion order, and vertices may be hashable Python objects.</p>
+  <h2><code>WeightedDigraph</code></h2>
+  <p>Use <code>WeightedDigraph</code> for directed graphs whose edge weights are validated by the graph implementation. Shortest-path and hopset APIs operate on this type.</p>
+  <p>See the <a href="https://github.com/sachncs/reachq/blob/master/reachq/graph.py" target="_blank" rel="noreferrer">source module ↗</a> for the current method surface.</p>
+</DocsLayout>

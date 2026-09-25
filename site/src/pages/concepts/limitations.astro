@@ -1,0 +1,14 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Limitations" kicker="08 / concept" description="The boundaries are part of the API story: know what is implemented, experimental, sequential, or not promised.">
+  <ul>
+    <li>There is no universal practical speedup implied by beta, hopbound, or epsilon.</li>
+    <li>The current hopset construction is sequential Python code.</li>
+    <li>Process-level construction parallelism is opt-in and workload-dependent.</li>
+    <li><code>reachq.research</code> and optional acceleration backends may change without stable API guarantees.</li>
+    <li>Exact transitive closure is output-quadratic and guarded by a pair budget.</li>
+    <li>The project is not a general graph library or a hosted graph service.</li>
+  </ul>
+  <p>For the adoption checklist and measured benchmark fields, see <a href="/reachq/limitations.html">the concise limitations page</a> and <a href="/reachq/guides/benchmarking.html">benchmarking guide</a>.</p>
+</DocsLayout>
