@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 176" role="img" aria-labelledby="title desc">
-  <title id="title">reachq</title>
-  <desc id="desc">Graph reachability, queryable.</desc>
-  <defs>
-    <linearGradient id="mark" x1="22" y1="18" x2="142" y2="154" gradientUnits="userSpaceOnUse"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#4338CA"/></linearGradient>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#fff"/></marker>
-  </defs>
-  <rect x="8" y="8" width="160" height="160" rx="42" fill="url(#mark)"/>
-  <g fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M52 119L86 58L131 119"/><path d="M52 119H131" marker-end="url(#arrow)"/></g>
-  <g fill="#fff"><circle cx="86" cy="49" r="14"/><circle cx="49" cy="124" r="14"/><circle cx="134" cy="124" r="14"/></g>
-  <text x="205" y="102" fill="#0F172A" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="94" font-weight="720" letter-spacing="-6">reach<tspan fill="#4F46E5">q</tspan></text>
-  <text x="209" y="139" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="600" letter-spacing="3.4">GRAPH REACHABILITY, QUERYABLE.</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 176" role="img" aria-labelledby="title desc"><title id="title">reachq</title><desc id="desc">Graph reachability, queryable.</desc><g fill="none" stroke="#4F46E5" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M51 47C69 29 99 29 118 45C138 62 142 91 128 111C117 126 102 133 84 132"/><path d="M112 112L140 140"/></g><g fill="#4F46E5"><circle cx="52" cy="47" r="11"/><circle cx="119" cy="47" r="11"/><circle cx="84" cy="132" r="11"/></g><text x="205" y="102" fill="#101828" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="94" font-weight="720" letter-spacing="-6">reach<tspan fill="#4F46E5">q</tspan></text><text x="209" y="139" fill="#667085" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="600" letter-spacing="3.4">GRAPH REACHABILITY, QUERYABLE.</text></svg>
