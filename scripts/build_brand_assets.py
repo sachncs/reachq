@@ -1,7 +1,9 @@
 """Generate reachq brand assets (PNG) from the SVG descriptions.
 
 Produces:
-  - docs/assets/favicon.png      (32x32)
+  - docs/assets/favicon-16.png   (16x16)
+  - docs/assets/favicon-32.png   (32x32)
+  - docs/assets/favicon.png      (32x32, legacy alias)
   - docs/assets/logo-256.png     (256x256)
   - docs/assets/social-preview.png (1280x640)
 
@@ -89,30 +91,13 @@ def build_icon(size: int, radius_ratio: float = 0.22) -> Image.Image:
     out.paste(bg, (0, 0), mask)
     draw = ImageDraw.Draw(out)
     s = size / 256.0
-    cx, cy = int(138 * s), int(128 * s)
+    cx, cy = int(128 * s), int(116 * s)
     r_ring = int(56 * s)
     ring_w = max(2, int(14 * s))
     tail_w = max(2, int(14 * s))
     inner_r = max(1, int(9 * s))
-    tail = ((int(166 * s), int(156 * s)), (int(198 * s), int(188 * s)))
+    tail = ((int(166 * s), int(156 * s)), (int(202 * s), int(192 * s)))
     draw_q(draw, cx, cy, r_ring, ring_w, tail, tail_w, inner_r)
-    nodes = [
-        (int(56 * s), int(80 * s)),
-        (int(200 * s), int(120 * s)),
-        (int(128 * s), int(160 * s)),
-        (int(200 * s), int(200 * s)),
-    ]
-    edges = [
-        (56, 80, 128, 80),
-        (128, 80, 200, 120),
-        (56, 80, 200, 120),
-        (56, 80, 128, 160),
-        (200, 120, 128, 160),
-        (128, 160, 200, 200),
-        (56, 80, 200, 200),
-    ]
-    edges = [(int(x1 * s), int(y1 * s), int(x2 * s), int(y2 * s)) for x1, y1, x2, y2 in edges]
-    draw_network(draw, nodes, edges, node_r=max(1, int(6 * s)), edge_w=max(1, int(3 * s)))
     return out
 
 
@@ -205,6 +190,8 @@ def build_social_preview() -> Image.Image:
 
 def main() -> None:
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
+    build_icon(16).save(ASSET_DIR / "favicon-16.png")
+    build_icon(32).save(ASSET_DIR / "favicon-32.png")
     build_icon(32).save(ASSET_DIR / "favicon.png")
     build_icon(64).save(ASSET_DIR / "favicon-64.png")
     build_icon(256).save(ASSET_DIR / "logo-256.png")
