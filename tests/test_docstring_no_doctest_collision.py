@@ -34,7 +34,7 @@ FORBIDDEN_TOKENS = [
 
 def docstring_tokens(path: str) -> list[str]:
     """Yield forbidden token matches found in a single .py file's docstrings."""
-    with open(path) as fp:
+    with open(path, encoding="utf-8") as fp:
         text = fp.read()
     if '"""' not in text:
         return []

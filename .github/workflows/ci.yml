@@ -147,6 +147,6 @@ jobs:
       - name: Install wheel smoke test
         run: |
           python -m venv /tmp/reachq-wheel-smoke
-          /tmp/reachq-wheel-smoke/bin/python -m pip install --no-deps dist/*.whl
+          /tmp/reachq-wheel-smoke/bin/python -m pip install dist/*.whl
           /tmp/reachq-wheel-smoke/bin/python -c "import reachq; print(reachq.__version__)"
           /tmp/reachq-wheel-smoke/bin/reachq --help

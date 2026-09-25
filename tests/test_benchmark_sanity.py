@@ -4,11 +4,17 @@ These tests ensure benchmark scripts execute without crashing on small
 inputs and produce sensible output.
 """
 
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
+TEST_ENV = {
+    **os.environ,
+    "PYTHONPATH": str(REPO_ROOT),
+    "REACHQ_LOG": "INFO",
+}
 
 
 class TestBenchmarkReachability:
@@ -29,7 +35,7 @@ class TestBenchmarkReachability:
                 "1",
             ],
             cwd=REPO_ROOT,
-            env={"PYTHONPATH": str(REPO_ROOT), "REACHQ_LOG": "INFO"},
+            env=TEST_ENV,
             capture_output=True,
             check=False,
             text=True,
@@ -82,7 +88,7 @@ class TestBenchmarkShortestPaths:
                 "1",
             ],
             cwd=REPO_ROOT,
-            env={"PYTHONPATH": str(REPO_ROOT), "REACHQ_LOG": "INFO"},
+            env=TEST_ENV,
             capture_output=True,
             check=False,
             text=True,
@@ -135,7 +141,7 @@ class TestCliSanity:
                 "1",
             ],
             cwd=REPO_ROOT,
-            env={"PYTHONPATH": str(REPO_ROOT)},
+            env=TEST_ENV,
             capture_output=True,
             check=False,
             text=True,
@@ -157,7 +163,7 @@ class TestCliSanity:
                 "1",
             ],
             cwd=REPO_ROOT,
-            env={"PYTHONPATH": str(REPO_ROOT)},
+            env=TEST_ENV,
             capture_output=True,
             check=False,
             text=True,
