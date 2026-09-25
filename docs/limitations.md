@@ -1,6 +1,6 @@
 # Limitations
 
-This page lists what `reachq` 0.9.0 does not do. Pair it with
+This page lists what the current `reachq` 0.9.0.dev0 snapshot does not do. Pair it with
 [`docs/algorithms.md`](algorithms.md) for what each entry means.
 
 ## What is NOT supported
@@ -13,7 +13,7 @@ This page lists what `reachq` 0.9.0 does not do. Pair it with
 | GPU acceleration | Not implemented. | This page. |
 | `(1+ε)`-approximation for the minimum shortcut set | Not implemented. `greedy_shortcut_set` is a vanilla greedy. | [`docs/approximation_analysis.md`](approximation_analysis.md) |
 | Amortised O(log² n) streaming shortcut set | Not implemented. | [`docs/streaming_proof.md`](streaming_proof.md) |
-| Backward-compatibility shims | None. v0.9.0 is a hard cut from v0.8.0. | [`docs/migration_0_9.md`](migration_0_9.md) |
+| Backward-compatibility shims | None. The current development snapshot is a hard cut from v0.8.x. | [`docs/migration_0_9.md`](migration_0_9.md) |
 | Real-world graph scale (web-Google, n ≈ 875k) | Memory is unblocked, but wall-clock is dominated by Python's per-edge overhead. | [`README.md`](https://github.com/sachncs/reachq/blob/master/README.md) |
 | Pretrained / cached predictions | Not implemented. `omega` and `epsilon` are explicit caller-provided parameters with common defaults documented in the docstrings. | n/a |
 | Reporting / visualisation beyond printed logs | Not implemented. The CLI prints results; there is no plotting, no dashboard, no HTML report. | [`reachq/cli.py`](https://github.com/sachncs/reachq/blob/master/reachq/cli.py) |

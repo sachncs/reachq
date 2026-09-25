@@ -4,8 +4,8 @@
 
 | Version | Supported |
 | ------- | --------- |
-| 0.9.x   | Yes       |
-| 0.8.x   | Yes       |
+| 0.9.0.dev* | Yes    |
+| 0.8.x      | No     |
 | < 0.8   | No        |
 
 ## Reporting a vulnerability
@@ -24,10 +24,9 @@ When you report, include:
 
 ### Response expectations
 
-- **Acknowledgement**: within 48 hours of your report.
-- **Assessment**: within 5 business days.
-- **Fix**: a patch release within 14 days for critical vulnerabilities.
-- **Disclosure**: we coordinate the public disclosure timing with you.
+This is a personal open-source project. Reports are reviewed on a best-effort
+basis; do not assume a response or a fixed remediation timeline. If a report
+is accepted, disclosure timing is coordinated with the reporter.
 
 ### Scope
 

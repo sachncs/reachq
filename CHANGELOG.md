@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.9.0] - 2026-08-30
+The current development snapshot is `0.9.0.dev0`. No PyPI release or Git tag
+exists yet; install from a source checkout.
+
+## Development changes (not released)
 
 Hard-cut correctness release. No backward compatibility shims;
 v0.8.x users must follow [`docs/migration_0_9.md`](docs/migration_0_9.md).
@@ -123,10 +126,8 @@ v0.8.x users must follow [`docs/migration_0_9.md`](docs/migration_0_9.md).
 
 ## [0.8.0] - 2026-08-15
 
-The first releaseable version of `reachq`. The previous tag
-(`7.0.0`) was a placeholder; this is the first PyPI-published
-artifact. The live test count is enforced by `pytest`; see the
-README "Tests" section.
+This historical section records the 0.8.0 implementation snapshot. It was not
+published to PyPI. The live test count is enforced by `pytest`.
 
 ### Added
 
