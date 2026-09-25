@@ -1,0 +1,42 @@
+---
+import '../docs.css'
+
+const { title, kicker, description } = Astro.props
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/reachq/favicon.svg" />
+    <title>{title} · reachq</title>
+  </head>
+  <body>
+    <header class="docs-header">
+      <div class="docs-shell docs-nav">
+        <a class="docs-brand" href="/reachq/" aria-label="reachq home">
+          <img src="/reachq/logo.svg" alt="reachq" />
+        </a>
+        <nav aria-label="Documentation navigation">
+          <a href="/reachq/getting-started.html">Start here</a>
+          <a href="/reachq/reference.html">Reference</a>
+          <a href="/reachq/limitations.html">Limits</a>
+          <a href="https://github.com/sachncs/reachq" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </nav>
+      </div>
+    </header>
+    <main class="docs-shell docs-main">
+      <div class="docs-kicker">{kicker}</div>
+      <h1>{title}</h1>
+      <p class="docs-lede">{description}</p>
+      <div class="docs-content">
+        <slot />
+      </div>
+    </main>
+    <footer class="docs-footer docs-shell">
+      <span>Graph reachability, queryable.</span>
+      <a href="/reachq/">Back to the product page →</a>
+    </footer>
+  </body>
+</html>

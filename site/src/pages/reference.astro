@@ -1,0 +1,23 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro'
+---
+<DocsLayout title="API reference" kicker="02 / supported surface" description="The small set of graph, construction, query, and invariant APIs intended for ordinary reachq users.">
+  <h2>Start with the top-level imports</h2>
+  <p>The supported surface is intentionally explicit. Use graph primitives and construction functions from the package modules below; treat <code>reachq.research</code> and <code>reachq.accel</code> as experimental.</p>
+  <pre><code>from reachq import Digraph, WeightedDigraph
+from reachq.shortcut import build_shortcut_set_for_reachability
+from reachq.hopset import build_hopset_for_sssp
+from reachq.reachability import bfs_reachability, parallel_bfs
+from reachq.shortest_paths import dijkstra, shortest_path_hopbound</code></pre>
+  <h2>Primary modules</h2>
+  <ul>
+    <li><strong>Graph primitives:</strong> <code>reachq.graph</code></li>
+    <li><strong>Reachability:</strong> <code>reachq.reachability</code> and <code>reachq.shortcut</code></li>
+    <li><strong>Shortest paths:</strong> <code>reachq.shortest_paths</code> and <code>reachq.hopset</code></li>
+    <li><strong>Validation:</strong> <code>reachq.invariants</code></li>
+    <li><strong>Serialization:</strong> <code>reachq.io</code></li>
+  </ul>
+  <h2>Read the signatures</h2>
+  <p>The implementation docstrings are the authoritative signature source. Browse the <a href="https://github.com/sachncs/reachq/blob/master/reachq/__init__.py" target="_blank" rel="noreferrer">top-level exports</a> and the <a href="https://github.com/sachncs/reachq/tree/master/reachq" target="_blank" rel="noreferrer">maintained modules</a> on GitHub.</p>
+  <div class="docs-callout"><p>There is no promise of API stability before 1.0. Breaking changes are recorded in <a href="https://github.com/sachncs/reachq/blob/master/CHANGELOG.md" target="_blank" rel="noreferrer">CHANGELOG.md</a>.</p></div>
+</DocsLayout>

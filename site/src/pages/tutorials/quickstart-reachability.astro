@@ -1,0 +1,20 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Quick start: reachability" kicker="08 / tutorial" description="Build a deterministic shortcut set and verify that it preserves exact reachability.">
+  <h2>One invariant, two traversals</h2>
+  <p>Run a direct BFS and a traversal over the original graph plus shortcuts. The result should be identical for the same source.</p>
+  <pre><code>from reachq.generators import random_dag
+from reachq.invariants import assert_reachability_preserved
+from reachq.reachability import bfs_reachability, parallel_bfs
+from reachq.shortcut import build_shortcut_set_for_reachability
+
+graph = random_dag(100, edge_probability=0.1, random_seed=42)
+shortcuts, beta, bound = build_shortcut_set_for_reachability(
+    graph, omega=3.0, random_seed=42,
+)
+assert_reachability_preserved(graph, shortcuts)
+source = graph.vertices()[0]
+assert parallel_bfs(graph, source, shortcuts) == bfs_reachability(graph, source)</code></pre>
+  <p>See the <a href="/reachq/limitations.html">adoption boundary</a> before interpreting the construction as a practical speedup.</p>
+</DocsLayout>

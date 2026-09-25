@@ -1,0 +1,22 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Limitations" kicker="03 / adoption boundary" description="What reachq does not promise yet, and the questions to answer before using it as production infrastructure.">
+  <h2>What is supported</h2>
+  <ul>
+    <li>Pure-Python directed-graph primitives and deterministic seeded constructions.</li>
+    <li>Exact reachability-preservation checks for shortcut-set workflows.</li>
+    <li>Weighted hopset construction with an explicit epsilon parameter and baseline comparison.</li>
+  </ul>
+  <h2>What is not promised</h2>
+  <ul>
+    <li>No universal practical speedup follows from beta or hopbound alone.</li>
+    <li>The hopset path is sequential in the current Python implementation.</li>
+    <li>Research algorithms and optional acceleration backends can change without a stable API promise.</li>
+    <li>There is no published wheel or hosted graph service yet.</li>
+    <li>Exact transitive closure is output-quadratic and guarded by a pair budget.</li>
+  </ul>
+  <div class="docs-callout"><p>Use NetworkX or igraph for general graph manipulation. Use reachq when its shortcut-set or hopset constructions are the specific thing you need.</p></div>
+  <h2>Benchmark honestly</h2>
+  <p>Record the commit, Python version, operating system, CPU, graph source, vertex and edge counts, seed, algorithm parameters, construction time, query time, memory, output size, and approximation error. A theoretical quantity is not a measured product speedup.</p>
+</DocsLayout>

@@ -1,0 +1,13 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro'
+---
+<DocsLayout title="FAQ" kicker="07 / orientation" description="Short answers to the questions that usually matter before trying reachq.">
+  <h2>Is reachq a graph database?</h2>
+  <p>No. It is a Python library for graph algorithms and reusable graph structure.</p>
+  <h2>Is it on PyPI?</h2>
+  <p>Not yet. Install from a source checkout so the code, examples, and tests use the same commit.</p>
+  <h2>Is every algorithm parallel?</h2>
+  <p>No. The reachability path can opt into process-level work. The current hopset construction is sequential in Python.</p>
+  <h2>Where should I report a bug?</h2>
+  <p>Use the <a href="https://github.com/sachncs/reachq/issues/new?template=bug.yml" target="_blank" rel="noreferrer">bug report template</a>. For security issues, follow <a href="https://github.com/sachncs/reachq/blob/master/SECURITY.md" target="_blank" rel="noreferrer">SECURITY.md</a>.</p>
+</DocsLayout>

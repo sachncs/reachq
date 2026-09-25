@@ -1,0 +1,15 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Benchmarks" kicker="06 / reproducibility" description="Benchmark reachq as an algorithmic library: record the work, the query, the graph, the environment, and the invariant together.">
+  <h2>Record a complete run</h2>
+  <ul>
+    <li>Commit, package version, Python version, operating system, and CPU.</li>
+    <li>Graph source and type, vertex count <code>n</code>, edge count <code>m</code>, density, and seed.</li>
+    <li>Algorithm, epsilon, omega, beta, hopbound, and refinement configuration.</li>
+    <li>Construction time, query time, memory, shortcut/hopset size, and approximation error.</li>
+  </ul>
+  <h2>Separate claim types</h2>
+  <p>Theoretical work/depth bounds, microbenchmarks, and end-to-end measurements answer different questions. Keep them separate and never use beta alone as a proxy for practical performance.</p>
+  <p>Reproducible benchmark scripts live in the <a href="https://github.com/sachncs/reachq/tree/master/scripts" target="_blank" rel="noreferrer">repository scripts</a>.</p>
+</DocsLayout>

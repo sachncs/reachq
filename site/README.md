@@ -13,7 +13,6 @@ The library documentation itself remains in ../docs.
 - Astro: https://astro.build/
 - Static output for GitHub Pages
 - Plain HTML, CSS, SVG, and a small client-side script
-- Static HTML, CSS, SVG, and a small client-side script
 
 ## Develop
 
@@ -25,7 +24,7 @@ npm run build
 npm run preview
 ~~~
 
-The production output is site/dist/.
+The production output is `site/dist/`.
 
 ## Deployment
 

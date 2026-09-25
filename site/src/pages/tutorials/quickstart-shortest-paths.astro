@@ -1,0 +1,20 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Quick start: shortest paths" kicker="09 / tutorial" description="Build a weighted hopset, then compare its bounded-hop distances with an exact shortest-path baseline.">
+  <h2>Make epsilon explicit</h2>
+  <p>A hopset is not a magic speedup switch. The useful contract is that the approximation budget is visible at the call site and checked against a baseline for the workload.</p>
+  <pre><code>from reachq import WeightedDigraph
+from reachq.hopset import build_hopset_for_sssp
+from reachq.invariants import assert_distance_approximation
+
+graph = WeightedDigraph()
+graph.add_edge("a", "b", 1)
+graph.add_edge("b", "c", 2)
+graph.add_edge("a", "c", 10)
+hopset, beta = build_hopset_for_sssp(graph, epsilon=0.1, random_seed=42)
+assert_distance_approximation(
+    graph, hopset, source="a", epsilon=0.1, max_hops=20,
+)</code></pre>
+  <p>The current implementation is sequential. See the <a href="/reachq/benchmarks.html">benchmark guidance</a> for what to record.</p>
+</DocsLayout>

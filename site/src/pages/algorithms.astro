@@ -1,0 +1,11 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro'
+---
+<DocsLayout title="Algorithms" kicker="04 / concepts" description="A plain-language map of the two constructions reachq exposes: shortcut sets for reachability and hopsets for weighted shortest paths.">
+  <h2>Shortcut sets</h2>
+  <p>The reachability construction adds directed shortcut edges to make repeated traversal queries more structured. The supported correctness question is exact: does the augmented graph preserve reachability from every source?</p>
+  <h2>Hopsets</h2>
+  <p>The shortest-path construction adds weighted links intended to reduce the number of hops in approximate single-source shortest-path queries. Epsilon describes the error budget; the implementation and tests define the engineering behavior.</p>
+  <h2>Research boundary</h2>
+  <p>The implementation is informed by the cited paper, but a paper result, a reachq implementation detail, and an empirical benchmark are different claims. The <a href="https://github.com/sachncs/reachq/blob/master/docs/INSPIRED_BY.md" target="_blank" rel="noreferrer">provenance notes</a> keep those categories separate.</p>
+</DocsLayout>
