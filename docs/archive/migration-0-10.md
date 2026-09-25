@@ -5,7 +5,7 @@
 > This document describes a planned refactor for a future 0.10.0
 > release. It is **not** the migration guide for the current
 > release. If you are upgrading from v0.8.x, see
-> [`docs/migration_0_9.md`](migration_0_9.md).
+> [`docs/archive/migration-0-9.md`](migration-0-9.md).
 
 v0.10.0 will be a hard-cut refactor for clarity, correctness, and
 performance. Every API change will be a breaking change; no compat
@@ -75,7 +75,7 @@ from reachq.shortcut import build_shortcut_set_for_reachability
 from reachq.closure import transitive_closure
 ```
 
-See [`docs/migration_0_9.md`](migration_0_9.md) for the
+See [`docs/archive/migration-0-9.md`](migration-0-9.md) for the
 already-shipped v0.9.0 migration and [the changelog on
 GitHub](https://github.com/sachncs/reachq/blob/master/CHANGELOG.md)
 for the full release history.

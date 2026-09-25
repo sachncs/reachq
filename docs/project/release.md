@@ -2,12 +2,24 @@
 
 This document covers how to deploy and distribute reachq.
 
+## Current release status
+
+The repository currently builds the development snapshot `0.9.0.dev0`. It is
+not published to PyPI and has no release tag. Do not describe this snapshot as
+`0.9.0` or tell users to install it with `pip install reachq`.
+
+Before 1.0, releases follow SemVer-style `0.x.y` numbering. Public behavior
+may change between minor versions; breaking changes must be recorded in the
+changelog and accompanied by a migration note when users need one. A version is
+released only when its tag, built artifacts, changelog entry, and documentation
+all agree.
+
 ## Installation Methods
 
 ### For Users
 
 ```bash
-# Install from PyPI (when published)
+# Install from PyPI (only after a real release is published)
 pip install reachq
 
 # Install from source

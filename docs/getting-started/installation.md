@@ -119,8 +119,7 @@ Install `pyarrow` directly with `pip install pyarrow`. The
 **`NetworkX is required for NetworkX interop`**
 
 Install `networkx` directly with `pip install networkx`. The
-`reachq[research]` extra does include `networkx`, but only when
-you install with `pip install reachq[research]` from PyPI; for
-now, install it directly from the source checkout.
+`reachq[research]` extra includes `networkx`; install it from the
+source checkout with `pip install -e ".[research]"` when you need it.
 
 For more, see the [FAQ](faq.md) or open an [issue](https://github.com/sachncs/reachq/issues).

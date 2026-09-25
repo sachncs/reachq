@@ -7,13 +7,13 @@ This page lists what the current `reachq` 0.9.0.dev0 snapshot does not do. Pair 
 
 | Capability | Status | Where to look |
 | --- | --- | --- |
-| Parallel hopset construction | Not implemented. CFR per-pivot SSSP is GIL-bound in Python; the hopset path runs sequentially. JLS dispatches per-pivot BFS through a process pool. | [`docs/migration_0_9.md`](../migration_0_9.md), [`docs/concepts/algorithms.md`](algorithms.md) |
+| Parallel hopset construction | Not implemented. CFR per-pivot SSSP is GIL-bound in Python; the hopset path runs sequentially. JLS dispatches per-pivot BFS through a process pool. | [`docs/archive/migration-0-9.md`](../archive/migration-0-9.md), [`docs/concepts/algorithms.md`](algorithms.md) |
 | JIT / native C extensions | Not implemented. The current package artifacts ship only pure-Python fallbacks. | [`docs/guides/acceleration.md`](../guides/acceleration.md) |
 | Distributed execution (Ray, Dask, GraphBLAS) | Stub only. | [`reachq/accel/`](https://github.com/sachncs/reachq/tree/master/reachq/accel) |
 | GPU acceleration | Not implemented. | This page. |
 | `(1+ε)`-approximation for the minimum shortcut set | Not implemented. `greedy_shortcut_set` is a vanilla greedy. | [`docs/research/experimental/approximation-analysis.md`](../research/experimental/approximation-analysis.md) |
 | Amortised O(log² n) streaming shortcut set | Not implemented. | [`docs/research/experimental/streaming-proof.md`](../research/experimental/streaming-proof.md) |
-| Backward-compatibility shims | None. The current development snapshot is a hard cut from v0.8.x. | [`docs/migration_0_9.md`](migration_0_9.md) |
+| Backward-compatibility shims | None. The current development snapshot is a hard cut from v0.8.x. | [`docs/archive/migration-0-9.md`](../archive/migration-0-9.md) |
 | Real-world graph scale (web-Google, n ≈ 875k) | Memory is unblocked, but wall-clock is dominated by Python's per-edge overhead. | [`README.md`](https://github.com/sachncs/reachq/blob/master/README.md) |
 | Pretrained / cached predictions | Not implemented. `omega` and `epsilon` are explicit caller-provided parameters with common defaults documented in the docstrings. | n/a |
 | Reporting / visualisation beyond printed logs | Not implemented. The CLI prints results; there is no plotting, no dashboard, no HTML report. | [`reachq/cli.py`](https://github.com/sachncs/reachq/blob/master/reachq/cli.py) |
