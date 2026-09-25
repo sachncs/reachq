@@ -680,7 +680,8 @@ def load_dataset(name: str, cache_dir: str = "data") -> Digraph:
     if not dest.exists():
         dest.parent.mkdir(parents=True, exist_ok=True)
         print(f"Downloading {name} from {url}...")
-        urllib.request.urlretrieve(url, dest)
+        # URL is selected from the controlled SNAP_DATASETS registry.
+        urllib.request.urlretrieve(url, dest)  # nosec B310
         print(f"Saved to {dest}")
 
     return parse_snap_file(str(dest))

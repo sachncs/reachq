@@ -17,8 +17,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install pip-audit bandit
+          pip install -e . pip-audit bandit
       - name: pip-audit
         run: pip-audit
       - name: bandit
-        run: bandit -r reachq/ -c pyproject.toml || true
+        run: bandit -r reachq/ -c pyproject.toml -s B101,B311
