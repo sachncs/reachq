@@ -46,4 +46,4 @@ importable symbol in the public API.
   `load_arrow`).
 - NetworkX adapter (`reachq.io_networkx.to_networkx` /
   `from_networkx`).
-- Documentation site (`mkdocs build --strict`).
+- Documentation source quality and link checks.

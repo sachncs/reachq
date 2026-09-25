@@ -1,143 +1,121 @@
 # reachq
 
-> Graph reachability, queryable.
+> **Graph reachability, queryable.**
 
-`reachq` is a Python library for building **shortcut sets** and **hopsets**
-on directed graphs. The constructions come from the paper *Parallel
-Reachability and Shortest Paths on Non-sparse Digraphs* by Ashvinkumar,
-Bernstein, Probst Gutenberg, and Saranurak (2026). The implementation is
-pure Python, deterministic, and supports parallel dispatch when you opt in.
+reachq is a pure-Python library for adding reusable structure to directed graphs. It builds **shortcut sets** for exact reachability workflows and **hopsets** for weighted shortest-path workflows, so repeated queries do not have to rediscover the same paths from scratch.
 
-## What's here
+## Project status
 
-| Section | Purpose |
-| ------- | ------- |
-| [Quick start](#quick-start) | First construction in 30 lines |
-| [API reference](reference.md) | Every public function |
-| [Examples](examples.md) | Five end-to-end applications with rendered outputs |
-| [Algorithms](algorithms.md) | How the constructions work |
-| [Architecture](architecture.md) | Per-module responsibility table |
-| [Benchmarks](benchmarks.md) | asv micro-benchmarks |
-| [Limitations](limitations.md) | What is not implemented |
-| [Glossary](GLOSSARY.md) | Terminology |
+reachq is pre-1.0 and installs from source. The core library is actively developed, deterministic by default, and intended for dense directed-graph research and algorithmic prototyping.
 
-## Quick start
+It is not a hosted graph database or a general-purpose replacement for NetworkX or igraph. The research namespace and optional acceleration backends are experimental and outside the stability contract.
 
-Install from source for now (a PyPI release is on the Roadmap):
+## Install
 
-```bash
-git clone https://github.com/sachncs/reachq
+~~~bash
+git clone https://github.com/sachncs/reachq.git
 cd reachq
-pip install -e ".[dev]"
-```
+python -m pip install -e ".[dev]"
+~~~
 
-### Build a shortcut set
+Requires Python 3.10–3.13, NumPy ≥ 1.21, and SciPy ≥ 1.10.
 
-```python
-from reachq import Digraph, RefinementConfig
-from reachq.shortcut import build_shortcut_set_for_reachability
-from reachq.reachability import bfs_reachability, parallel_bfs
-from reachq.invariants import assert_reachability_preserved
+## Minimal working example
+
+Build a reachability shortcut set, verify its invariant, and query the augmented graph:
+
+~~~python
 from reachq.generators import random_dag
+from reachq.invariants import assert_reachability_preserved
+from reachq.reachability import bfs_reachability, parallel_bfs
+from reachq.shortcut import build_shortcut_set_for_reachability
 
-# A 1000-vertex random DAG.
-g = random_dag(n=1000, edge_probability=0.1, random_seed=42)
-
-# Build a shortcut set; returns (shortcuts, beta, realised_bound).
+graph = random_dag(n=1000, edge_probability=0.1, random_seed=42)
 shortcuts, beta, realised_bound = build_shortcut_set_for_reachability(
-    g, omega=3.0, random_seed=42,
+    graph, omega=3.0, random_seed=42,
 )
 
-# Invariant: shortcut set preserves reachability for every source.
-assert_reachability_preserved(g, shortcuts)
+assert_reachability_preserved(graph, shortcuts)
 
-# Queries: parallel_bfs over G ∪ H equals bfs_reachability over G.
-sources = (g.vertices()[0], g.vertices()[len(g.vertices()) // 2])
-for src in sources:
-    assert parallel_bfs(g, src, shortcuts) == bfs_reachability(g, src)
-```
+source = graph.vertices()[0]
+assert parallel_bfs(graph, source, shortcuts) == bfs_reachability(graph, source)
+~~~
 
-### Build a hopset
+For weighted shortest paths, start with [the shortest-path tutorial](tutorials/quickstart-shortest-paths.md).
 
-```python
-from reachq import WeightedDigraph
-from reachq.hopset import build_hopset_for_sssp
-from reachq.shortest_paths import dijkstra, shortest_path_hopbound
+## Core capabilities
 
-g = WeightedDigraph()
-for i, j, w in [(0, 1, 1), (1, 2, 2), (0, 2, 10)]:
-    g.add_edge(i, j, w)
+### Reachability shortcut sets
 
-hopset, beta = build_hopset_for_sssp(g, epsilon=0.1, random_seed=42)
+A shortcut set augments the original directed graph with carefully chosen edges. The supported invariant is exact reachability preservation: adding shortcuts should not change which vertices are reachable.
 
-# Verify (1 + eps) approximation for a source.
-original = dijkstra(g, 0)
-approx = shortest_path_hopbound(g, hopset, 0, max_hops=100)
-for v, exact in original.items():
-    assert approx[v] <= (1 + 0.1) * exact + 1e-9
-```
+See [the reachability tutorial](tutorials/quickstart-reachability.md), [the algorithms guide](algorithms.md), and the [API reference](reference.md).
 
-### Save and load
+### Weighted shortest-path hopsets
 
-```python
-from reachq.io import dump, load
+A hopset adds weighted links that reduce the number of hops in a path. The epsilon parameter is explicit; compare the hop-bounded result with an exact Dijkstra baseline for the graph and workload you care about.
 
-text = dump(g)
-h = load(text)
-assert g.num_vertices() == h.num_vertices()
-```
+See [the shortest-path tutorial](tutorials/quickstart-shortest-paths.md), [the algorithms guide](algorithms.md), and the [API reference](reference.md).
 
-### Disable refinements
+## Guarantees and non-guarantees
 
-```python
-from reachq import RefinementConfig
+Supported invariants and engineering properties:
 
-shortcuts, beta, _ = build_shortcut_set_for_reachability(
-    g,
-    omega=3.0,
-    random_seed=42,
-    refinement=RefinementConfig(enable_tc_pruning=False, tight_tc_trigger=True),
-)
-```
+- shortcut-set workflows expose reachability-preservation checks;
+- random seeds and typed configuration make runs reproducible;
+- the reachability construction can optionally dispatch per-pivot BFS work through a process pool;
+- benchmark and test inputs can record graph size, parameters, construction time, query time, and output sizes.
 
-## Configuration
+Do not infer:
 
-The `refinement` parameter is a :class:`~reachq.RefinementConfig` dataclass
-of boolean toggles. All default to on except `parallel`. See
-[Algorithms → Refinement flags](algorithms.md#refinement-flags) for the
-full list and what each does.
+- a universal practical speedup from beta or hopbound alone;
+- true parallel speedup for every construction;
+- a formal approximation guarantee for experimental greedy routines;
+- production readiness for research modules or optional acceleration backends.
 
-```python
-from reachq import RefinementConfig
+## Limitations
 
-cfg = RefinementConfig(
-    adaptive_sampling=True,
-    enable_tc_pruning=True,
-    parallel=False,  # set True to dispatch per-pivot BFS across processes
-)
-```
+- The package is not published to PyPI yet.
+- The hopset path is currently sequential because its per-pivot SSSP workload is GIL-bound in Python.
+- The wheel is pure Python; Cython, Numba, and Rust code under \`reachq/accel/\` is opt-in and not shipped by default.
+- \`reachq.research\` contains experimental algorithms that may change without a major-version bump.
+- Exact transitive closure is output-quadratic and guarded by an explicit pair budget.
 
-## CLI
+See the full [limitations page](limitations.md) before adopting reachq for production decisions.
 
-```bash
-python -m reachq.cli --help
-```
+## Performance and benchmarks
 
-## Where to look next
+There is no single representative speedup number. A useful benchmark record includes:
 
-- [Quick start](getting-started.md) — install + first construction in detail.
-- [Algorithms](algorithms.md) — how the constructions work.
-- [API reference](reference.md) — every public function, signature, and parameter.
-- [Examples](examples.md) — five end-to-end applications with rendered outputs.
-- [Limitations](limitations.md) — what is not implemented.
+- reachq version and commit;
+- Python version, operating system, and CPU;
+- graph source/type, vertex count n, edge count m, density, and random seed;
+- algorithm parameters such as omega, epsilon, beta, and hopbound;
+- construction time, query time, memory, shortcut/hopset size, and approximation error.
 
-## Running tests
+The [benchmark guide](benchmarks.md) separates theoretical bounds, microbenchmarks, and end-to-end measurements.
 
-```bash
-pytest                  # the full suite
-pytest -m "not slow"    # skip the slow stress tests
-pytest --cov=reachq     # with a coverage report
-```
+## Documentation map
+
+- [Installation and first construction](getting-started.md)
+- [Reachability tutorial](tutorials/quickstart-reachability.md)
+- [Shortest-path tutorial](tutorials/quickstart-shortest-paths.md)
+- [Algorithms and refinements](algorithms.md)
+- [API reference](reference.md)
+- [Examples](examples.md)
+- [Architecture](architecture.md)
+- [Benchmarks](benchmarks.md)
+- [Testing](testing.md)
+- [Limitations](limitations.md)
+- [Glossary](GLOSSARY.md)
+
+Research provenance and historical material live under [Research](INSPIRED_BY.md) and the repository archive; they do not redefine the supported API.
+
+## Research and contribution
+
+The constructions are informed by *Parallel Reachability and Shortest Paths on Non-sparse Digraphs* by Ashvinkumar, Bernstein, Probst Gutenberg, and Saranurak. See [the provenance notes](INSPIRED_BY.md) for the relationship between the paper, this implementation, and experimental extensions.
+
+To contribute, read [CONTRIBUTING.md](https://github.com/sachncs/reachq/blob/master/CONTRIBUTING.md). Report security issues through [SECURITY.md](https://github.com/sachncs/reachq/blob/master/SECURITY.md).
 
 ## License
 

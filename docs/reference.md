@@ -5,13 +5,12 @@ authoritative reference: every signature, parameter, return type,
 and exception is read directly from the source. To regenerate:
 
 ```bash
-pip install -e ".[dev]" mkdocs mkdocs-material mkdocstrings
-mkdocs build --strict
+pip install -e ".[dev]"
 ```
 
 If a public function is missing from this page, it is either not
 in `reachq.__all__` (and therefore not part of the stability
-contract) or the mkdocstrings directive needs updating. Open an
+contract) or the reference examples need updating. Open an
 issue if you find either.
 
 ## Graph primitives
@@ -383,6 +382,6 @@ surface.
 ## Removing dead entries
 
 If you remove a function from the public API, also remove it from
-this page. The mkdocs build will fail if a `:::` directive refers
+this page. Automated documentation checks will fail if a reference refers
 to a missing symbol, which is the intent: dead entries are caught
 in CI.

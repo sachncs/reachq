@@ -76,7 +76,7 @@ accel-rust = [
 
 [project.urls]
 Homepage = "https://github.com/sachncs/reachq"
-Documentation = "https://github.com/sachncs/reachq/tree/main/docs"
+Documentation = "https://sachncs.github.io/reachq/"
 Repository = "https://github.com/sachncs/reachq.git"
 Issues = "https://github.com/sachncs/reachq/issues"
 
