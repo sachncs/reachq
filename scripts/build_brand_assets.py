@@ -18,11 +18,12 @@ from PIL import Image, ImageDraw, ImageFont
 
 ASSET_DIR = Path(__file__).resolve().parents[1] / "docs" / "assets"
 
-INDIGO = (79, 70, 229)
-TEAL = (20, 184, 166)
-WHITE = (255, 255, 255)
-SOFT = (255, 255, 255, 82)
-INK = (24, 24, 27)
+INDIGO = (13, 19, 28)
+TEAL = (30, 43, 55)
+LIME = (184, 255, 61)
+WHITE = (242, 238, 229)
+SOFT = (255, 255, 255, 44)
+INK = (13, 19, 28)
 
 
 def gradient(size: tuple[int, int], c1: tuple[int, int, int], c2: tuple[int, int, int]) -> Image.Image:
@@ -84,20 +85,25 @@ def draw_network(
 
 
 def build_icon(size: int, radius_ratio: float = 0.22) -> Image.Image:
-    """Build a square app icon of the given pixel size."""
+    """Build the q-loop app icon at the requested pixel size."""
     bg = gradient((size, size), INDIGO, TEAL)
     mask = rounded_rect_mask((size, size), int(size * radius_ratio))
     out = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     out.paste(bg, (0, 0), mask)
     draw = ImageDraw.Draw(out)
-    s = size / 256.0
-    cx, cy = int(128 * s), int(116 * s)
-    r_ring = int(56 * s)
-    ring_w = max(2, int(14 * s))
-    tail_w = max(2, int(14 * s))
-    inner_r = max(1, int(9 * s))
-    tail = ((int(166 * s), int(156 * s)), (int(202 * s), int(192 * s)))
-    draw_q(draw, cx, cy, r_ring, ring_w, tail, tail_w, inner_r)
+    s = size / 160.0
+    sw = max(1, int(10 * s))
+    box = (int(29 * s), int(28 * s), int(143 * s), int(143 * s))
+    for start, end in ((205, 315), (325, 80), (92, 170)):
+        draw.arc(box, start, end, fill=WHITE, width=sw)
+    for x, y, color, radius in ((47, 48, LIME, 13), (30, 99, WHITE, 12), (84, 139, WHITE, 12)):
+        r = int(radius * s)
+        draw.ellipse((int((x * s) - r), int((y * s) - r), int((x * s) + r), int((y * s) + r)), fill=color)
+    points = [(68, 111), (83, 101), (73, 83), (93, 71)]
+    draw.line([(int(x * s), int(y * s)) for x, y in points], fill=LIME, width=max(1, int(9 * s)), joint="curve")
+    arrow = [(int(x * s), int(y * s)) for x, y in ((88, 67), (107, 68), (95, 83))]
+    draw.polygon(arrow, fill=LIME)
+    draw.line([(int(111 * s), int(121 * s)), (int(133 * s), int(145 * s))], fill=WHITE, width=sw)
     return out
 
 
