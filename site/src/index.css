@@ -74,6 +74,12 @@ h2 span { color: var(--muted); }
 .code-purple { color: #b8a6ff; }
 .code-green { color: var(--accent); }
 .architecture-section { border-bottom: 1px solid var(--line); }
+.section[id], .status-strip[id] { scroll-margin-top: 88px; }
+.why-list { border-top: 1px solid var(--line); }
+.why-list article { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.why-number { color: var(--accent); font: 11px var(--font-mono); letter-spacing: .08em; }
+.why-list h3 { color: var(--text); font-size: 18px; letter-spacing: -.03em; }
+.why-list p { max-width: 470px; margin-top: 6px; color: var(--muted); font-size: 13px; line-height: 1.7; }
 .architecture-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 58px; }
 .architecture-card { padding: 29px; border: 1px solid var(--line); background: var(--bg); }
 .architecture-card-accent { border-color: #60753a; background: #111a17; }
@@ -119,6 +125,7 @@ h2 span { color: var(--muted); }
   .hero-visual { height: 400px; margin-top: 58px; }
   .section { padding: 82px 0; }
   .status-grid, .onboarding-grid, .example-head, .results-head, .limitations-grid, .why-grid, .architecture-head, .how-grid, .guarantees-head, .docs-head, .research-panel { display: block; }
+  .why-list { margin-top: 42px; }
   .status-meta { margin-top: 28px; text-align: left; }
   .onboarding-grid > div + div, .example-head > p, .results-head > p, .architecture-head > p, .guarantees-head > p, .docs-head > p { margin-top: 32px; }
   .example-layout, .architecture-grid { grid-template-columns: 1fr; margin-top: 42px; }
