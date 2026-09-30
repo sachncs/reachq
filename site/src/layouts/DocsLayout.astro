@@ -1,8 +1,25 @@
 ---
 import '../docs.css'
-import '../docs-index.css'
 
 const { title, kicker, description } = Astro.props
+const pathname = Astro.url.pathname.replace(/^\/reachq/, '') || '/'
+const pagePath = pathname === '/' ? '/' : pathname.replace(/\.html$/, '')
+const groups = [
+  { label: 'Overview', links: [{ label: 'Project status', href: '/status.html', path: '/status' }, { label: 'Archive', href: '/archive.html', path: '/archive' }] },
+  { label: 'Getting started', links: [{ label: 'Installation', href: '/getting-started/installation.html', path: '/getting-started/installation' }, { label: 'Reachability quickstart', href: '/getting-started/reachability.html', path: '/getting-started/reachability' }, { label: 'Shortest-path quickstart', href: '/getting-started/shortest-paths.html', path: '/getting-started/shortest-paths' }, { label: 'Examples', href: '/getting-started/examples.html', path: '/getting-started/examples' }] },
+  { label: 'Core concepts', links: [{ label: 'Shortcut sets', href: '/concepts/shortcut-sets.html', path: '/concepts/shortcut-sets' }, { label: 'Hopsets', href: '/concepts/hopsets.html', path: '/concepts/hopsets' }, { label: 'Correctness', href: '/concepts/correctness.html', path: '/concepts/correctness' }, { label: 'Limitations', href: '/concepts/limitations.html', path: '/concepts/limitations' }] },
+  { label: 'Guides', links: [{ label: 'Parameters', href: '/guides/parameters.html', path: '/guides/parameters' }, { label: 'Serialization', href: '/guides/serialization.html', path: '/guides/serialization' }, { label: 'NetworkX', href: '/guides/networkx.html', path: '/guides/networkx' }, { label: 'Benchmarking', href: '/guides/benchmarking.html', path: '/guides/benchmarking' }] },
+  { label: 'API reference', links: [{ label: 'Reference overview', href: '/reference.html', path: '/reference' }, { label: 'Graphs', href: '/reference/graphs.html', path: '/reference/graphs' }, { label: 'Reachability', href: '/reference/reachability.html', path: '/reference/reachability' }, { label: 'Shortest paths', href: '/reference/shortest-paths.html', path: '/reference/shortest-paths' }, { label: 'Configuration', href: '/reference/configuration.html', path: '/reference/configuration' }, { label: 'I/O', href: '/reference/io.html', path: '/reference/io' }, { label: 'Exceptions', href: '/reference/exceptions.html', path: '/reference/exceptions' }] },
+  { label: 'Research', links: [{ label: 'Provenance', href: '/research/provenance.html', path: '/research/provenance' }, { label: 'Paper mapping', href: '/research/paper-mapping.html', path: '/research/paper-mapping' }, { label: 'Implementation notes', href: '/research/implementation-notes.html', path: '/research/implementation-notes' }] },
+  { label: 'Project', links: [{ label: 'Contributing', href: '/project/contributing.html', path: '/project/contributing' }, { label: 'Roadmap', href: '/project/roadmap.html', path: '/project/roadmap' }, { label: 'Security', href: '/project/security.html', path: '/project/security' }, { label: 'Code of conduct', href: '/project/code-of-conduct.html', path: '/project/code-of-conduct' }] },
+]
+const flatLinks = groups.flatMap((group) => group.links)
+const currentIndex = flatLinks.findIndex((link) => link.path === pagePath)
+const previous = currentIndex > 0 ? flatLinks[currentIndex - 1] : undefined
+const next = currentIndex >= 0 ? flatLinks[currentIndex + 1] : undefined
+const breadcrumb = groups.find((group) => group.links.some((link) => link.path === pagePath))?.label ?? 'Documentation'
+const editPath = pagePath === '/' ? 'index.astro' : `${pagePath.replace(/^\//, '')}.astro`
+const searchItems = flatLinks.map(({ label, href, path }) => ({ label, href, path }))
 ---
 <!doctype html>
 <html lang="en">
@@ -15,60 +32,61 @@ const { title, kicker, description } = Astro.props
   </head>
   <body>
     <header class="docs-header">
-      <div class="docs-shell docs-nav">
-        <a class="docs-brand" href="/reachq/" aria-label="reachq home">
-          <img src="/reachq/logo.svg" alt="reachq" />
-        </a>
-        <nav aria-label="Documentation navigation">
-          <a href="/reachq/getting-started.html">Start here</a>
-          <a href="/reachq/reference.html">Reference</a>
-          <a href="/reachq/status.html">Status</a>
-          <a href="/reachq/limitations.html">Limits</a>
-          <a href="https://github.com/sachncs/reachq" target="_blank" rel="noreferrer">GitHub ↗</a>
-        </nav>
+      <div class="docs-header-inner">
+        <a class="docs-brand" href="/reachq/" aria-label="reachq home"><img src="/reachq/logo-reversed.svg" alt="reachq" /><span>Documentation</span></a>
+        <div class="docs-header-actions">
+          <label class="search-box" for="docs-search"><span aria-hidden="true">⌕</span><input id="docs-search" type="search" placeholder="Search docs" autocomplete="off" /><kbd>/</kbd></label>
+          <a class="header-github" href="https://github.com/sachncs/reachq" target="_blank" rel="noreferrer">GitHub</a>
+          <button class="sidebar-toggle" type="button" aria-controls="docs-sidebar" aria-expanded="false">Menu</button>
+        </div>
       </div>
+      <div class="search-results" id="search-results" hidden></div>
     </header>
-    <main class="docs-shell docs-main">
-      <div class="docs-kicker">{kicker}</div>
-      <h1>{title}</h1>
-      <p class="docs-lede">{description}</p>
-      <div class="docs-content">
-        <slot />
-      </div>
-      <aside class="docs-index" aria-label="Documentation map">
-        <div>
-          <strong>Learn</strong>
-          <a href="/reachq/getting-started/installation.html">Installation</a>
-          <a href="/reachq/getting-started/reachability.html">Reachability</a>
-          <a href="/reachq/getting-started/shortest-paths.html">Shortest paths</a>
-          <a href="/reachq/getting-started/examples.html">Examples</a>
-        </div>
-        <div>
-          <strong>Understand</strong>
-          <a href="/reachq/concepts/shortcut-sets.html">Shortcut sets</a>
-          <a href="/reachq/concepts/hopsets.html">Hopsets</a>
-          <a href="/reachq/concepts/correctness.html">Correctness</a>
-          <a href="/reachq/concepts/limitations.html">Limitations</a>
-        </div>
-        <div>
-          <strong>Build</strong>
-          <a href="/reachq/guides/parameters.html">Parameters</a>
-          <a href="/reachq/guides/serialization.html">Serialization</a>
-          <a href="/reachq/guides/benchmarking.html">Benchmarking</a>
-          <a href="/reachq/reference.html">API reference</a>
-        </div>
-        <div>
-          <strong>Project</strong>
-          <a href="/reachq/research/provenance.html">Research</a>
-          <a href="/reachq/project/contributing.html">Contributing</a>
-          <a href="/reachq/project/roadmap.html">Roadmap</a>
-          <a href="/reachq/archive.html">Archive</a>
-        </div>
+    <div class="docs-layout">
+      <aside class="docs-sidebar" id="docs-sidebar" aria-label="Documentation navigation">
+        <div class="sidebar-heading"><span>Reachq docs</span><span class="sidebar-version">0.9.0.dev0</span></div>
+        <nav>
+          {groups.map((group) => (
+            <div class="sidebar-group" data-search-group={group.label}>
+              <div class="sidebar-group-label">{group.label}</div>
+              {group.links.map((link) => (
+                <a class:list={["sidebar-link", { active: link.path === pagePath }]} href={`/reachq${link.href}`} aria-current={link.path === pagePath ? 'page' : undefined} data-search-label={link.label}>{link.label}</a>
+              ))}
+            </div>
+          ))}
+        </nav>
+        <a class="sidebar-home" href="/reachq/">← Product page</a>
       </aside>
-    </main>
-    <footer class="docs-footer docs-shell">
-      <span>Graph reachability, queryable.</span>
-      <a href="/reachq/">Back to the product page →</a>
-    </footer>
+      <main class="docs-main">
+        <div class="breadcrumbs" aria-label="Breadcrumb"><a href="/reachq/">reachq</a><span>/</span><span>{breadcrumb}</span><span>/</span><strong>{title}</strong></div>
+        <div class="article-grid">
+          <article class="docs-article">
+            <header class="article-header"><div class="docs-kicker">{kicker}</div><h1>{title}</h1><p class="docs-lede">{description}</p><div class="article-tools"><a href={`https://github.com/sachncs/reachq/edit/master/site/src/pages/${editPath}`} target="_blank" rel="noreferrer">Edit this page</a><span>Updated with the source</span></div></header>
+            <div class="docs-content"><slot /></div>
+            <nav class="article-pagination" aria-label="Article navigation">
+              {previous ? <a href={`/reachq${previous.href}`}><span>Previous</span><strong>← {previous.label}</strong></a> : <span></span>}
+              {next ? <a class="next" href={`/reachq${next.href}`}><span>Next</span><strong>{next.label} →</strong></a> : <span></span>}
+            </nav>
+          </article>
+          <aside class="article-aside"><div class="outline-mobile"><button type="button" aria-expanded="false">On this page <span>+</span></button></div><nav class="article-outline" aria-label="On this page"><div class="outline-label">On this page</div><div class="toc-list"></div></nav></aside>
+        </div>
+      </main>
+    </div>
+    <footer class="docs-footer"><div><img src="/reachq/logo-reversed.svg" alt="reachq" /><span>Graph reachability, queryable.</span></div><a href="https://github.com/sachncs/reachq" target="_blank" rel="noreferrer">Source on GitHub ↗</a></footer>
+    <script define:vars={{ searchItems }}>
+      const sidebar = document.querySelector('#docs-sidebar')
+      const sidebarToggle = document.querySelector('.sidebar-toggle')
+      sidebarToggle?.addEventListener('click', () => { const open = sidebar?.classList.toggle('open'); sidebarToggle.setAttribute('aria-expanded', String(open)) })
+      const search = document.querySelector('#docs-search')
+      const docsBase = '/reachq'
+      const results = document.querySelector('#search-results')
+      const renderResults = (value) => { const query = value.trim().toLowerCase(); if (!query) { results.hidden = true; results.innerHTML = ''; return }; const matches = searchItems.filter((item) => item.label.toLowerCase().includes(query) || item.path.includes(query)).slice(0, 8); results.innerHTML = matches.length ? matches.map((item) => `<a href="${docsBase}${item.href}"><span>${item.label}</span><small>${item.path}</small></a>`).join('') : '<p>No matching documentation.</p>'; results.hidden = false }
+      search?.addEventListener('input', (event) => renderResults(event.target.value))
+      document.addEventListener('keydown', (event) => { if (event.key === '/' && document.activeElement?.tagName !== 'INPUT') { event.preventDefault(); search?.focus() }; if (event.key === 'Escape') { search.value = ''; renderResults(''); search.blur() } })
+      const toc = document.querySelector('.toc-list')
+      document.querySelectorAll('.docs-content h2, .docs-content h3').forEach((heading, index) => { if (!heading.id) heading.id = heading.textContent.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `section-${index}`; const link = document.createElement('a'); link.href = `#${heading.id}`; link.textContent = heading.textContent; link.className = heading.tagName === 'H3' ? 'toc-subitem' : ''; toc?.append(link); const copy = document.createElement('button'); copy.className = 'heading-copy'; copy.type = 'button'; copy.setAttribute('aria-label', `Copy link to ${heading.textContent}`); copy.textContent = '#'; copy.addEventListener('click', async () => { await navigator.clipboard?.writeText(`${location.origin}${location.pathname}#${heading.id}`); copy.textContent = '✓'; setTimeout(() => { copy.textContent = '#' }, 1200) }); heading.append(copy) })
+      document.querySelectorAll('.docs-content pre').forEach((pre) => { const language = pre.dataset.language || (pre.textContent.includes('reachq') ? 'python' : 'shell'); const bar = document.createElement('div'); bar.className = 'code-bar'; bar.innerHTML = `<span>${language}</span><button type="button">Copy</button>`; pre.parentNode.insertBefore(bar, pre); pre.classList.add('enhanced-code'); bar.querySelector('button').addEventListener('click', async (event) => { await navigator.clipboard?.writeText(pre.innerText); event.currentTarget.textContent = 'Copied'; setTimeout(() => { event.currentTarget.textContent = 'Copy' }, 1200) }) })
+      const outlineButton = document.querySelector('.outline-mobile button'); outlineButton?.addEventListener('click', () => { const open = document.querySelector('.article-outline')?.classList.toggle('open'); outlineButton.setAttribute('aria-expanded', String(open)) })
+    </script>
   </body>
 </html>
