@@ -57,6 +57,11 @@
 .docs-content code { padding: 2px 5px; border: 1px solid rgba(125, 217, 245, .22); border-radius: 3px; color: var(--cyan); background: rgba(125, 217, 245, .07); font: 13px var(--font-mono); }
 .docs-content pre { margin: 0; overflow: auto; padding: 20px 22px; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 var(--radius) var(--radius); color: #dce3e1; background: var(--surface-code); font: 13px/1.75 var(--font-mono); tab-size: 2; }
 .docs-content pre code { padding: 0; border: 0; color: inherit; background: none; font: inherit; }
+.syntax-keyword { color: #b8a6ff; }
+.syntax-string { color: #e7c783; }
+.syntax-number { color: var(--accent); }
+.syntax-comment { color: #718095; }
+.syntax-command { color: var(--cyan); }
 .code-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border: 1px solid var(--line); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; color: var(--subtle); background: var(--surface); font: 10px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
 .code-bar button { border: 0; color: var(--accent); background: transparent; cursor: pointer; font: inherit; text-transform: inherit; }
 .docs-callout { margin: 25px 0; padding: 16px 18px; border-left: 2px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; background: rgba(184, 255, 61, .06); }
